@@ -76,7 +76,7 @@ Arduino UNO projeden çıkarılmıştır.
 | 11 | [Açık sorular](docs/11-acik-sorular.md) | Bilinmeyenler ve nasıl kapatılacakları |
 
 **Formlar:**
-- [Ölçüm formu](formlar/olcum-formu.md) — M1-M17, doldurulmayı bekliyor
+- [Ölçüm formu](formlar/olcum-formu.md) — M1-M19, doldurulmayı bekliyor
 - [Güç bütçesi](formlar/guc-butcesi.md) — akım hesabı tablosu
 
 **Arşiv:**
