@@ -102,7 +102,7 @@ Gerçek makineler genellikle **A + B** birlikte kullanır. Sizinkinin de bu olma
 
 ```
 Röle COM  ──→ valf bobini
-Röle NO   ──→ +12 V (valf beslemesi)
+Röle NO   ──→ +6 V (valf beslemesi)
 Röle NC   ──→ boşta
 
 MCU röleyi çeker  → NO kapanır → valf enerjilenir → vantuz havalanır → BIRAKIR
@@ -185,21 +185,60 @@ Ayrıca: **tutucu kütlesini düşük tutun.** Z ekseni sınırlı torkla çalı
 | 380 Ω | 24 V | 63 mA |
 | 1440 Ω | 48 V | 33 mA |
 
-> 🔴 **Yanma mekanizması:** 23 Ω'luk (6 V) bir bobine 12 V vermek 6.3 W demektir — sürekli 1.6 W'a
-> dayanıklı bir parçada. Tablo buna yalnızca **≤%25 görev döngüsü, maks. 19 s** izin veriyor.
-> Sürekli uygulanırsa sarım pişer. **[M15](../formlar/olcum-formu.md) yapılmadan gerilim vermeyin.**
+### ✅ Bu valfin ölçülmüş değerleri
+
+**M15 ölçümü yapıldı: bobin omik direnci 25 Ω.**
+
+| Parametre | Değer |
+|---|---|
+| **Bobin gerilimi** | **6 V** |
+| Çalışma akımı | **240 mA** |
+| Sürekli güç | **1.44 W** (sınır 1.6 W → içeride ✔) |
+| Görev döngüsü | **%100 sürekli** çalışabilir |
+
+Doğrulama: `V ≈ √(1.6 × 25) = 6.32 V` → 6 V. Üretici tablosundaki 23 Ω ±%10 bandı 20.7-25.3 Ω,
+yani 25 Ω bandın üst ucunda ve tutarlı.
+
+> 🔴 **12 V VERMEYİN.** 25 Ω'luk bobinde 12 V = **5.76 W** — sürekli 1.6 W'a dayanıklı bir parçada
+> 3.6 kat aşırı yük. Üretici tablosu buna yalnızca **≤%25 görev döngüsü, maksimum 19 s** izin
+> veriyor. Sürekli uygulanırsa sarım pişer.
+
+### Sistemde 6 V rayı gerekiyor
+
+Bu, güç dağıtımını etkiliyor: daha önce valf için 12 V varsayılmıştı, gerçek ihtiyaç 6 V.
+İki uygulama yolu var:
+
+**A — 24→6 V DC-DC buck (önerilen).** Ayarlanabilir bir LM2596 modülü yeterli (~240 mA çekiyor,
+her modül fazlasıyla karşılar). Temiz, verimli, kalıcı çözüm.
+
+**B — 12 V + seri direnç (hızlı çözüm).** Elinizde 12 V varsa, bobinle **seri 25 Ω** koyarak
+gerilimi ikiye bölersiniz:
+
+```
+12 V ──[25 Ω, ≥3 W]──┬── bobin (25 Ω) ──┬── MOSFET drain
+                     │                  │
+                  6 V burada         240 mA
+```
+
+Toplam devre 50 Ω, akım 240 mA, bobinin üstünde tam 6 V. Direncin harcadığı güç de 1.44 W —
+**en az 3 W'lık bir direnç kullanın**, aksi halde ısınıp değeri kayar. Kaba ama güvenilir.
+
+> ⚠️ **5 V ile çalıştırmayı denemeyin.** Solenoidler tipik olarak anma geriliminin %70-80'inde
+> çeker; 6 V bobin için bu 4.2-4.8 V demek. 5 V teknik olarak eşiğin üstünde ama pay çok dar —
+> hortum basıncı arttığında veya bobin ısındığında çekmemeye başlar ve bu, teşhisi zor bir
+> aralıklı arıza olarak karşınıza çıkar.
 
 ### Sürme devresi
 
-En kötü durum (6 V / 23 Ω = 261 mA) baz alınarak:
+Ölçülmüş değerlerle (6 V / 25 Ω = **240 mA**):
 
 ```
-                        +6V veya +12V   ← valfin kendi rayı, MCU regülatöründen DEĞİL
+                        +6 V  ← valfin kendi rayı (24→6V buck veya 12V+25Ω seri), MCU regülatöründen DEĞİL
                               │
               ┌───────────────┼──────────────┐
               │               │              │
             [C1]            [C2]          ┌──┴──┐
-          100µF/25V        100nF          │Bobin│  ~23Ω (6V) / ~90Ω (12V)
+          100µF/25V        100nF          │Bobin│  25 Ω @ 6 V = 240 mA
           elektrolitik     seramik        └──┬──┘
               │               │              │
               │               │       D1 ────┤   1N5819 (1A Schottky) veya SS14
@@ -219,7 +258,7 @@ En kötü durum (6 V / 23 Ω = 261 mA) baz alınarak:
 
 | Bileşen | Neden |
 |---|---|
-| **Q1 lojik seviyeli ve ≥261 mA olmalı** | `AO3400A` (30 V, 5.7 A, Vgs=2.5 V'ta ~50 mΩ) doğru seçim. **`2N7002` (115 mA) ve `BSS138` (200 mA) yetersizdir** — bu devrede en sık yapılan hata. `IRF540N` ve `2N7000` lojik seviyeli değildir, 3.3 V ile tam açılmaz ve ısınır. |
+| **Q1 lojik seviyeli ve ≥240 mA olmalı** | `AO3400A` (30 V, 5.7 A, Vgs=2.5 V'ta ~50 mΩ) doğru seçim. **`2N7002` (115 mA) ve `BSS138` (200 mA) yetersizdir** — bu devrede en sık yapılan hata. `IRF540N` ve `2N7000` lojik seviyeli değildir, 3.3 V ile tam açılmaz ve ısınır. |
 | **D1 flyback diyot zorunlu** | Bobinin manyetik alanı çökerken yüzlerce volt üretir; diyot yoksa MOSFET ilk kapatmada ölür. **`1N4148` (200 mA) yetersiz**, 1 A'lik parça kullanın. *(İnce ayar: D1 ile seri ~24 V zener/TVS koymak kapanma süresini kısaltır.)* |
 | **R2 gate pull-down (100 kΩ)** | MCU reset hâlindeyken veya açılışta GPIO yüksek empedanstadır. Bu direnç olmazsa valf rastgele çekebilir. **Sistemin "enerjisiz = güvenli" mantığının elektriksel garantisi budur.** |
 

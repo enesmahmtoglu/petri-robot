@@ -175,7 +175,8 @@ Vakum hattının aç/kapa elemanı. **DC bobinli** — bu, kullanıcı tarafınd
 | Üretici | Shenzhen Zonhen Electric Appliances |
 | **Bobin tipi** | **DC** (teyit edildi) — ZHV serisi hem DC hem AC üretiliyor |
 | ZHV serisi DC aralığı | 3-48 VDC (sarım siparişe göre yapılıyor) |
-| 🔴 **Bobin gerilimi** | **Model numarasında YOK** — [M15](../formlar/olcum-formu.md) ile ölçülecek |
+| ✅ **Bobin gerilimi** | **6 V** — M15 ölçüldü: bobin direnci **25 Ω** |
+| ✅ Çalışma akımı | **240 mA** (1.44 W, sürekli sınır 1.6 W) |
 | Sürekli güç | **1.6 W** (05 gövde sınıfı) |
 | Çalışma basıncı | 0-375 mmHg (**0.5 bar**) |
 | Vakum servisi | Uygun |

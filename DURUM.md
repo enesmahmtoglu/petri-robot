@@ -71,7 +71,7 @@ adaptörü, veya başlıkları söküp Arduino istifleme soketi lehimlemek (en t
 | # | Ne | Neden acil |
 |---|---|---|
 | **M11** | LED panel etiketi: sabit gerilim mi akım mı | Yanlışsa LCM-40DA paneli yakar (boşta 110 V) |
-| **M15** | Valf bobin direnci | Model numarası gerilimi içermiyor; yanlış gerilim bobini yakar |
+| ~~**M15**~~ | ~~Valf bobin direnci~~ | ✅ **TAMAM: 25 Ω → 6 V / 240 mA** |
 | **M19** | Kart varyantı: TXS0108E çipleri var mı | 5 V varyantındaysa **EN hattı hiç çalışmayacak** |
 | **M1** | Vida hatvesi / kasnak dişi | `adım/mm` bunsuz hesaplanamaz |
 | **M4** | NEMA 17 anma akımları | Sürücü akım ayarı bunsuz yapılamaz |

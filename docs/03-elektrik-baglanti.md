@@ -277,7 +277,8 @@ ve senkron hareket doğal olarak elde edilir. Detaylar:
    24 V kaynak ──┬──→ CNC Shield EXT-V klemensi ──→ 4× TMC2208 motor gücü
                  │      ⚠️ acil stop bu hattın üzerinde, seri
                  │
-                 └──→ [DC-DC 24→12 V] ──→ vakum pompası + solenoid valf
+                 ├──→ [DC-DC 24→12 V] ──→ vakum pompası
+                 └──→ [DC-DC 24→6 V]  ──→ solenoid valf (240 mA)
                                               (ayrı besleme tercih edilir)
 
    USB (PC veya adaptör) ──→ Platform2Go ──→ 3V3 ──→ Shield lojik rayı (5V pinine)

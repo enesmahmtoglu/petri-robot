@@ -16,7 +16,7 @@ kamerası.
 | Öncelik | Ölçüm | Neden acil |
 |---|---|---|
 | 🔴 1 | **M11** — LED panel tipi | Yanlışsa panel yanar |
-| 🔴 2 | **M15** — Valf bobin direnci | Yanlış gerilim bobini yakar |
+| ~~🔴 2~~ | ~~**M15** — Valf bobin direnci~~ | ✅ **TAMAM: 25 Ω → 6 V bobin, 240 mA** |
 | 🟠 3 | **M1** — Vida hatvesi / kasnak dişi | `adım/mm` bunsuz hesaplanamaz |
 | 🟠 4 | **M4** — Motor akımları ve faz çiftleri | Sürücü akım ayarı bunsuz yapılamaz |
 | 🟡 5 | Kalanı | |
@@ -179,16 +179,17 @@ Arduino dijital başlığının iki yanına bakın (silkscreen `IC300` / `IC301`
 | Çalışma akımı (etiket veya ampermetre) | ___ A |
 | Tip (diyafram pompa / venturi ejektör) | ___ |
 
-### M15 — 🔴 Valf bobin gerilimi
+### M15 — ✅ Valf bobin gerilimi (TAMAMLANDI)
 
-> **Bu ölçüm yapılmadan valfe gerilim VERMEYİN.** Model numarası ("ZHV-0518") gerilimi
+> ✅ **Ölçüm yapıldı: 25 Ω → 6 V bobin.** Aşağıdaki yöntem kayıt için bırakılmıştır.
+> Model numarası ("ZHV-0518") gerilimi
 > içermiyor; bobin 6 V için sarılmışsa 12 V verdiğinizde 6.3 W harcanır, oysa parça sürekli
 > 1.6 W'a dayanıklıdır.
 
 Valfi söküp iki ucu arasındaki **DC direnci** ölçün. Önce probları birbirine değdirip kablo
 direncini okuyun ve çıkarın (23 Ω'da 0.3 Ω fark eder).
 
-**Ölçülen direnç:** ___ Ω
+**Ölçülen direnç:** ✅ **25 Ω**
 
 | Direnç | Bobin gerilimi | Akım |
 |---|---|---|
@@ -206,7 +207,13 @@ düşmüyorsa tahmin yanlıştır.
 **2 V'tan başlayıp yavaşça yükseltin**, "klik" sesini dinleyin. Valfler anma geriliminin
 %70-80'inde çeker → `anma ≈ klik gerilimi ÷ 0.75`, en yakın standart raya yuvarlayın.
 
-**Sonuç — valf bobin gerilimi:** ___ V
+**Sonuç — valf bobin gerilimi:** ✅ **6 V** · akım **240 mA** · güç **1.44 W** (sürekli sınır 1.6 W, içeride)
+
+> Kontrol: `V ≈ √(1.6 × 25) = 6.32 V` → 6 V. Üretici tablosundaki 23 Ω ±%10 bandı 20.7-25.3 Ω;
+> 25 Ω bandın üst ucunda ve tutarlı. **Sistemde bir 6 V rayı gerekiyor** — 24→6 V buck ya da
+> 12 V + seri 25 Ω/3 W direnç. Bkz. [Vakum sistemi §6](../docs/06-vakum-sistemi.md).
+
+> 🔴 **12 V vermeyin:** 25 Ω bobinde 5.76 W olur, sürekli sınırın 3.6 katı.
 
 ---
 

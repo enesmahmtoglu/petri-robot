@@ -79,6 +79,12 @@
 #define ADC_VACUUM_CHANNEL    0u
 
 /* --- Cikislar ------------------------------------------------------------- */
+/* Vakum valfi (Zonhen ZHV-0518 DC).
+ * OLCULDU (M15): bobin direnci 25 ohm -> 6 V bobin, 240 mA, 1.44 W surekli.
+ * Bu pin bir MOSFET gate'ini surer (AO3400A + 1N5819 flyback + 100k pulldown).
+ * !! Bobin 6 V rayindan beslenir, MCU regulatorunden DEGIL.
+ * !! 12 V vermeyin: 25 ohm'da 5.76 W olur, surekli sinir 1.6 W.
+ * Bkz. docs/06-vakum-sistemi.md bolum 6 */
 #define PIN_VALVE_PORT        XMC_GPIO_PORT3     /* Arduino SCL -> P3.0      */
 #define PIN_VALVE_NUM         0u
 

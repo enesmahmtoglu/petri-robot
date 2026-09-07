@@ -20,13 +20,24 @@ gerilim tipiyse (12 V / 24 V) bağlandığı anda yanar.
 
 ---
 
-### AS-02 — Solenoid valfin bobin gerilimi kaç volt?
+### ~~AS-02 — Solenoid valfin bobin gerilimi kaç volt?~~ ✅ KAPANDI
 
-**Neden kritik:** Model numarası gerilimi içermiyor. 6 V için sarılmış bir bobine 12 V vermek
-4 kat aşırı güç demektir; sürekli uygulanırsa sarım yanar.
+**Ölçüm (M15):** bobin omik direnci **25 Ω**.
 
-**Nasıl kapanır:** [M15](../formlar/olcum-formu.md) — bobin direncini ölçün, `V ≈ √(1.6 × R)`.
-**Kapanana kadar:** Valfe **hiçbir gerilim vermeyin**.
+**Sonuç: 6 V bobin.**
+
+| Kontrol | Hesap | Sonuç |
+|---|---|---|
+| Gerilim tahmini | `V ≈ √(1.6 × 25)` = 6.32 V | En yakın standart ray → **6 V** |
+| Sürekli güç | `6² / 25` = **1.44 W** | Sürekli sınır 1.6 W → **içeride** ✔ |
+| Çalışma akımı | `6 / 25` = **240 mA** | |
+| Üretici tablosu | 23 Ω ±%10 = 20.7-25.3 Ω → 6 V | 25 Ω bandın üst ucunda, tutarlı ✔ |
+
+**Sonucu:** Sistemde bir **6 V rayı** gerekiyor. Ayrıntı ve iki uygulama seçeneği:
+[Vakum sistemi §6](06-vakum-sistemi.md).
+
+> ⚠️ **12 V vermeyin.** 25 Ω bobinde 12 V = 5.76 W; üretici tablosu buna yalnızca **≤%25 görev
+> döngüsü, maksimum 19 s** izin veriyor. Sürekli uygulanırsa sarım pişer.
 
 ---
 
@@ -124,7 +135,7 @@ pompa/valf, 3.3-5 V lojik.
 
 **Seçenekler:**
 1. Makineye ayrı 24 V SMPS + DC-DC dönüştürücüler (**önerilen**)
-2. MCH-305A 24 V verir, pompa/valf ayrı 12 V adaptörden (iyi uzlaşma)
+2. MCH-305A 24 V verir, pompa ayrı 12 V adaptörden, valf 24→6 V buck ile (iyi uzlaşma)
 3. Her şey MCH-305A'dan + DC-DC (kabul edilebilir, ama CC foldback riski en yüksek)
 
 **Durum:** Karar bekliyor. Detay: [Güvenlik §5](07-guvenlik.md).

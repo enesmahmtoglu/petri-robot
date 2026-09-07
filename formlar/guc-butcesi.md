@@ -58,7 +58,7 @@ olarak yeterli**, ~2.5 kat pay var.
 | Yük | Gerilim | Akım | Not |
 |---|---|---|---|
 | Vakum pompası | ___ V | ___ A | M13. Kalkışta 3-6 kat ani akım |
-| Solenoid valf | ___ V | ___ mA | M15. 1.6 W sürekli → 6 V'ta 261 mA, 12 V'ta 133 mA |
+| Solenoid valf | **6 V** | **240 mA** | ✅ M15 ölçüldü (25 Ω). 1.44 W sürekli. **6 V rayı gerekiyor** |
 | XMC4200 Platform2Go | 5 V (USB) | ~___ mA | USB'den, ayrı |
 | LED sürücü (LCM-40DA) | **220 V AC** | 0.23 A @ 230 V | **DC bütçeye dahil değil** — şebekeden besleniyor |
 
@@ -76,7 +76,8 @@ MCH-305A: **0-30 V / 0-5 A, tek çıkışlı, lineer.** Sabit 5 V çıkışı yo
 | Ray | Kim kullanıyor |
 |---|---|
 | 24 V | 4 × TMC2208 motor gücü |
-| ~12 V | Vakum pompası, solenoid valf |
+| ~12 V | Vakum pompası |
+| **6 V** | Solenoid valf (M15: 25 Ω → 6 V) |
 | 5 V | XMC4200 (USB'den) |
 | 3.3 V | Shield lojik rayı (karttan) |
 
@@ -96,7 +97,8 @@ olarak kullanmak bu yeteneği israf eder. Ayrıca muz fişli kablolar çalışma
 **2. İyi ödünleşme — gürültülü yükü ayırın**
 
 - Motorlar: MCH-305A, **24.0 V, akım sınırı 4.5 A**
-- Pompa + valf: **ayrı bir 12 V / 2-3 A adaptör**
+- Pompa: **ayrı bir 12 V / 2-3 A adaptör**
+- Valf: **6 V** — 24→6 V buck, ya da 12 V + seri 25 Ω/3 W direnç
 
 En kötü geçici akımı sürücülerden tamamen ayırır. Tezgâh kaynağını kullanmaya devam etmek
 istiyorsanız **tek başına en değerli iyileştirme budur.**
@@ -106,7 +108,8 @@ istiyorsanız **tek başına en değerli iyileştirme budur.**
 - 24.0 V, akım sınırı **4.5 A** (2 A değil — pay bırakın)
 - Sürücü V_M ucuna **1000-2200 µF düşük ESR + 100 nF**
 - 24 V hattına **TVS diyot** (SMBJ30A)
-- Pompa/valf 24→12 V buck üzerinden (buck'ın kendi akım sınırı ani akımı yumuşatır)
+- Pompa 24→12 V buck üzerinden (buck'ın kendi akım sınırı ani akımı yumuşatır)
+- Valf 24→6 V buck üzerinden (240 mA, en küçük modül yeter)
 - Firmware'de: **pompa çalıştırma asla hareketle çakışmasın**
 
 ---
@@ -145,6 +148,7 @@ Artık kaynak 24 V verir ve ayarladığınız akımın üstünde CC'ye katlanır
 | Ayarlanan akım sınırı | ___ A |
 | Ölçülen boşta akım (motorlar tutuyor) | ___ A |
 | Ölçülen hareket akımı | ___ A |
-| Pompa/valf beslemesi | ___ |
+| Pompa beslemesi | ___ |
+| Valf 6 V rayı nasıl elde edildi (buck / seri direnç) | ___ |
 | Dekuplaj kondansatörü takıldı | ☐ |
 | TVS diyot takıldı | ☐ |

@@ -16,7 +16,7 @@ Bu listedeki her madde, ya bir bileşeni anında öldürür ya da insanı yarala
 | 2 | **Motor bağlı değilken sürücüyü enerjilendirip test etme** | Akımı tüketecek bir yük olmadığı için sürücü zarar görebilir. *(İstisna: Vref ölçümü — orada motor **sökülü olmalı**, bkz. §4.)* |
 | 3 | **Sürücüyü ters takma** | Yanar. Yön için potansiyometreyi referans alma — TMC2208'in potu A4988'in **ters** tarafındadır. **EN pinini** shield'ın EN işaretiyle hizala. |
 | 4 | **LED panelini etiketini okumadan LCM-40DA'ya bağlama** | Sürücü sabit **akım** tipidir, boşta 110 V'a kadar çıkar. Panel sabit gerilim tipiyse yanar. Bkz. §2. |
-| 5 | **Valfe direnç ölçmeden gerilim verme** | Model numarası gerilimi içermiyor. 6 V bobine 12 V = 4 kat aşırı güç, sarım pişer. |
+| 5 | **Valfe 6 V'tan fazla verme** | ✅ Ölçüldü: 25 Ω → **6 V bobin**. 12 V vermek 5.76 W demektir, sürekli sınır 1.6 W. Sarım pişer. |
 | 6 | **220 V'a enerjiliyken dokunma** | LCM-40DA'nın PFC kondansatörleri fişten çektikten sonra da yük tutar. **En az 60 saniye bekleyin.** |
 | 7 | **DAVE'deki "BMI Get/Set" aracını kullanma** | Infineon kart kılavuzunun kendi uyarısı: yanlış kullanımı kartı kalıcı olarak çalışmaz hale getirebilir. |
 | 8 | **XMC pinine 5 V verme** | XMC pinleri 5 V toleranslı değil. Bkz. [elektrik dokümanı](03-elektrik-baglanti.md). |
@@ -131,7 +131,7 @@ görürsünüz ve "pot bozuk" sanırsınız.
 |---|---|---|
 | **CC foldback** | Akım sınırına değince kaynak gerilim kaynağı olmaktan çıkar, gerilimi düşürür. Sürücüler resetlenir, konum ve StealthChop kalibrasyonu **hareketin ortasında sessizce** kaybolur. | Sınırı cömert ayarla (4-4.5 A). Sürücü V_M ucuna **1000-2200 µF + 100 nF**. Pompayı hareket sırasında çalıştırma. |
 | **Rejeneratif gerilim** | Lineer kaynak akım çekemez; frenleyen motorlar rayı yukarı iter. | 24 V hattına **TVS diyot** (SMBJ30A). TMC2208 mutlak maks. ~40 V. |
-| **Tek çıkış, üç ray gerekli** | 24 V motor, ~12 V pompa/valf, 3.3-5 V lojik. | DC-DC dönüştürücüler, veya pompa/valfi ayrı bir 12 V adaptöre al. |
+| **Tek çıkış, dört ray gerekli** | 24 V motor, ~12 V pompa, **6 V valf**, 3.3-5 V lojik. | DC-DC dönüştürücüler, veya pompayı ayrı bir 12 V adaptöre al. |
 | **Pompa ani akımı** | Küçük diyafram pompalar çalışırken 0.5-1.5 A, kalkışta 3-6 katı çeker. | Pompayı ayrı beslemeye al — en yüksek değerli tek iyileştirme. |
 
 **Öneri:** MCH-305A'yı makineye sabitlemek yerine **tezgâh aleti olarak saklayın**. Ayarlanabilir
