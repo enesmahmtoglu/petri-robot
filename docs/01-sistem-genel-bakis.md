@@ -83,7 +83,7 @@ reponun kapsamını büyütmez.
 | Sürücü kartı | Protoneer CNC Shield V3 | ⚠️ Karta **takılmıyor**, bkz. [elektrik](03-elektrik-baglanti.md) |
 | Motor sürücü | TMC2208 v1.2 × 4 | Standalone, 1/8 mikroadım |
 | Motorlar | NEMA 17 × 3, NEMA 8 × 1 | |
-| Vakum valfi | Zonhen ZHV-0518 | Gerilimi **bilinmiyor** |
+| Vakum valfi | Zonhen ZHV-0518 DC | Gerilimi **bilinmiyor** |
 | Vakum kafası | 2 × körüklü vantuz | Mevcut, belgelenmemiş |
 | LED sürücü | Mean Well LCM-40DA | 220 V, sonraki faz |
 | Güç kaynağı | MCH-305A | 0-30 V / 0-5 A, tek çıkış |

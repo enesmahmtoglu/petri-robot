@@ -123,7 +123,36 @@ CV/CC geçişi, 220 V giriş, 6.4 kg.
 
 ### `xmc4200/`
 
-Infineon XMC4200 Platform2Go belgeleri. *(Araştırma sürüyor, dosyalar eklenecek.)*
+Sistemin mikrodenetleyicisi.
+
+| Dosya | Ne |
+|---|---|
+| `XMC4200-Platform2Go-kullanim-kilavuzu-rev1.1.pdf` | Infineon resmi kart kılavuzu Rev 1.1 (2025-01-23). **Arduino pin haritası Şekil 9 (s.15), şema Bölüm 3.1 (s.19-24), BOM Bölüm 3.2 (s.25-30).** Ayrı yayınlanmış şema PDF'i **yoktur** — şema bu belgenin içindedir. |
+| `XMC4100-XMC4200-datasheet-v1.5.pdf` | Infineon resmi cihaz datasheet'i. **Tablo 13 port/alternatif fonksiyonlar (CCU çıkışları), Tablo 14 mutlak maksimum (5 V toleransı yok, sınır 4.3 V), Tablo 20 çalışma koşulları.** |
+
+**Çevrimiçi kaynaklar:**
+- Ürün sayfası: https://www.infineon.com/evaluation-board/KIT-XMC-PLT2GO-XMC4200
+- Kart kılavuzu: https://www.infineon.com/dgdl/Infineon-XMC4200_Platform2Go-UserManual-v01_00-EN.pdf?fileId=5546d4626f229553016f8fca76c12c96
+- Cihaz datasheet'i: https://www.infineon.com/dgdl/Infineon-XMC4100_XMC4200_DS-DS-v01_04-EN.pdf?fileId=5546d462696dbf120169817056f938ff
+- ModusToolbox BSP: https://github.com/Infineon/TARGET_KIT_XMC_PLT2GO_XMC4200
+- XMCLib CAT3 (sürücü kütüphanesi): https://github.com/Infineon/mtb-xmclib-cat3
+- XMC4 API referansı: https://infineon.github.io/mtb-xmclib-cat3/xmc4_api_reference_manual/html/index.html
+- CMSIS paketi XMC4000_DFP 2.14.0: https://www.keil.arm.com/packs/xmc4000_dfp-infineon/versions/
+- DAVE IDE: https://softwaretools.infineon.com/tools/com.ifx.tb.tool.daveide
+
+> ⚠️ **Referans kılavuzu (CCU4 §18, GPIO §22) yerel kopya olarak eklenemedi.** Infineon artık o
+> belge için doğrudan PDF yerine doküman portalı sayfası döndürüyor. Firmware yazarken CCU4
+> register ayrıntıları için gerekecek — Infineon dokümantasyon portalından indirip bu klasöre
+> koyun.
+
+> ⚠️ **Kart kılavuzunda iki hata var:** §1 kartın Ethernet'i olduğunu söylüyor (**yanlış** —
+> XMC4200'de Ethernet MAC yok, BOM'da PHY yok; XMC4400 kılavuzundan kopyalanmış). Tablo 9
+> `CAN_RX`'i P14.0 gösteriyor, doğrusu **P14.3** (Tablo 4 ve Şekil 7 böyle diyor; P14.0
+> potansiyometre).
+
+> İlgili dokümanlar: [Bileşenler §8](../docs/02-bilesenler.md) ·
+> [Elektrik ve bağlantılar](../docs/03-elektrik-baglanti.md) ·
+> [Firmware mimarisi](../docs/08-firmware-mimarisi.md)
 
 ---
 

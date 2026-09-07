@@ -12,7 +12,7 @@ motorlu çatal tutucu kavrıyor.
 ## 1. Bilinenler
 
 - Kafada **iki adet körüklü vantuz** var, iki ayrı mavi hortumla besleniyor (hızlı geçme rakorlar).
-- Hatta bir **Zonhen ZHV-0518** mikro solenoid valf var (kırmızı silikon hortum bir ucunda, metal
+- Hatta bir **Zonhen ZHV-0518 DC** mikro solenoid valf var (kırmızı silikon hortum bir ucunda, metal
   rakor diğer ucunda, iki telli siyah kablo).
 - Kullanıcı beyanına göre sistemde bir **SPDT röle** var ve enerji kesildiğinde vakumun
   tutulmaya devam ettiği söyleniyor. **Bu doğrulanmadı** — bkz. §3.

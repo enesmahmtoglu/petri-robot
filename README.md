@@ -50,7 +50,7 @@ Uzun dikey kule **motorsuzdur** — ileride kamera ve bilgisayarın montaj yeri 
 | Motor sürücü | **TMC2208 v1.2** × 4 | Adım motoru sürme | Mevcut |
 | Motor | **NEMA 17** ince × 3 | X, Y, Z | Mevcut |
 | Motor | **NEMA 8 / SY20STH30-0604A** × 1 | Tutucu | Mevcut |
-| Solenoid valf | **Zonhen ZHV-0518** | Vakum aç/kapa | Mevcut, **gerilimi bilinmiyor** |
+| Solenoid valf | **Zonhen ZHV-0518 DC** | Vakum aç/kapa | Mevcut, **gerilimi bilinmiyor** |
 | LED sürücü | **Mean Well LCM-40DA** | İnceleme aydınlatması | Mevcut, sonraki faz |
 | Güç kaynağı | **MCH-305A** (0-30 V / 0-5 A) | Besleme | Mevcut |
 | Görü | Raspberry Pi + kamera | Optik inceleme | **Henüz yok** |

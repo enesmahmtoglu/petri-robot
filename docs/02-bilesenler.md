@@ -166,13 +166,15 @@ X, Y ve Z eksenlerinde. Model bilinmiyor.
 
 ---
 
-## 5. Zonhen ZHV-0518 Mikro Solenoid Valf
+## 5. Zonhen ZHV-0518 DC Mikro Solenoid Valf
 
-Vakum hattının aç/kapa elemanı.
+Vakum hattının aç/kapa elemanı. **DC bobinli** — bu, kullanıcı tarafından teyit edilmiştir.
 
 | Parametre | Değer |
 |---|---|
 | Üretici | Shenzhen Zonhen Electric Appliances |
+| **Bobin tipi** | **DC** (teyit edildi) — ZHV serisi hem DC hem AC üretiliyor |
+| ZHV serisi DC aralığı | 3-48 VDC (sarım siparişe göre yapılıyor) |
 | 🔴 **Bobin gerilimi** | **Model numarasında YOK** — [M15](../formlar/olcum-formu.md) ile ölçülecek |
 | Sürekli güç | **1.6 W** (05 gövde sınıfı) |
 | Çalışma basıncı | 0-375 mmHg (**0.5 bar**) |
@@ -276,10 +278,75 @@ kadar açın. Kısa devreyi kaldırın.
 
 ## 8. Infineon XMC4200 Platform2Go
 
-Sistemin tek kontrolcüsü.
+Sistemin tek kontrolcüsü. Sipariş kodu **KIT_XMC_PLT2GO_XMC4200**, silkscreen
+`Platform2Go XMC4200-V1.1`.
 
-> **Araştırma sürüyor** — künye, pin haritası ve Arduino shield uyumluluğu
-> [elektrik dokümanına](03-elektrik-baglanti.md) eklenecek.
+### Kart
+
+| Parametre | Değer |
+|---|---|
+| Takılı MCU | **XMC4200-F64K256**, PG-LQFP-64-19 |
+| Kart boyutu | 66 × 129 mm (Arduino UNO'dan belirgin büyük) |
+| Besleme | **Yalnızca micro-USB** (X100 = hedef, X101 = debugger) |
+| Regülatör | IFX1117ME V33, **1.0 A** 3.3 V LDO |
+| 5 V hattı | USB VBUS'ın ters akım koruma diyodundan geçmiş hâli — **regülatör değil** |
+| Dış devreye verilebilir akım | Pratikte **~500 mA** (USB host sınırı) |
+| **VIN pini** | **YOK** — güç başlığının 1. ve 8. pinleri bağlantısız |
+| Barrel jack | Yok |
+| Hata ayıklayıcı | **J-Link OB**, ikinci bir XMC4200 üzerinde. SWD + SWO/SWV + sanal COM port |
+| VCOM pinleri | P2.14 (TX) / P2.15 (RX) = Arduino D1/D0 |
+| Arduino başlığı | UNO R3 pin dizilimi ✔ — ama 🔴 **erkek pin, dişi soket değil** |
+| Genişleme başlıkları X1/X2 | **Hiçbir varyantta takılı değil** — çıplak delik |
+
+### Mikrodenetleyici (XMC4200-F64K256)
+
+| Parametre | Değer |
+|---|---|
+| Çekirdek | ARM **Cortex-M4**, **80 MHz** azami |
+| FPU | Var (tek hassasiyet, IEEE754) |
+| DSP/MAC | Tek çevrimlik SIMD çarpma-toplama, donanım bölme |
+| MPU | 8 bölge |
+| Flash | **256 KB** — erişim süresi 20 ns → 80 MHz'de `WSPFLASH ≥ 2` |
+| Prefetch birimi | 1 KB, 2 yollu küme ilişkili; isabetler tek çevrim |
+| SRAM | **40 KB** (16 KB PSRAM + 24 KB DSRAM1) |
+| Boot ROM | 16 KB |
+| **CCU4** | **2 modül × 4 dilim = 8 dilim**, 16 bit |
+| **CCU8** | **1 modül × 4 dilim**, dilim başına 2 karşılaştırma |
+| HRPWM | 4 kanal, 150 ps çözünürlük (bu projede gereksiz) |
+| POSIF | 1 (kuadratür/Hall — bu projede gereksiz) |
+| Zamanlayıcı saati `fCCU` | Azami **80 MHz** (12.5 ns) |
+| NVIC | 112 düğüm, **64 öncelik seviyesi** (6 bit) |
+| GPIO | 35 çift yönlü (P0/P1/P2/P3) + 9 **sadece giriş** (P14) |
+| Sürücü gücü | **Seçilebilir** (zayıf / orta / güçlü + yavaş/yumuşak kenar) |
+
+### 🔴 Uyarılar
+
+| # | Uyarı |
+|---|---|
+| 1 | **CNC Shield karta takılmıyor.** Arduino konnektörleri Samtec **TSW** serisi *erkek* pin başlığı; shield'ın altında da erkek pin var. Pin haritası elektriksel olarak uyumlu, sorun **mekanik**. [Çözümler](03-elektrik-baglanti.md#1--shield-karta-takılmıyor--önce-bunu-okuyun) |
+| 2 | **5 V toleranslı DEĞİL.** Mutlak maksimum giriş: `VDDP + 1.0 V` veya **4.3 V**, hangisi düşükse. Limit anahtarları 3.3 V'ta çalışmalı. |
+| 3 | **Dört montaj varyantı var**, hepsinin silkscreen'i aynı. 5 V varyantlarında TXS0108E seviye çevirici takılı ve **shield'ın 10 kΩ EN pull-up'ı ile çakışıyor** → EN hiç etkinleşmez. [Detay](03-elektrik-baglanti.md#2--kart-varyantınızı-belirleyin) · [M19](../formlar/olcum-formu.md) |
+| 4 | **"Güçlü" sürücü modu DC akım değil kenar hızı verir.** Garanti DC sürme her iki modda ~2 mA. Tavsiye edilen ±5 mA/pin, 20 mA/grup, 100 mA/cihaz. **Solenoidi asla doğrudan pinden sürmeyin.** |
+| 5 | **Arduino A0 (P14.0) kart üzerindeki 10 kΩ potansiyometreye bağlı** (silkscreen R7). Kullanılacaksa R7 sökülmeli. |
+| 6 | **DAVE'deki "BMI Get/Set" aracını kullanmayın** — Infineon'un kendi uyarısı: kartı kalıcı olarak çalışmaz hale getirebilir. |
+| 7 | **USB ile beslenirken 5V header pininden ayrı besleme vermeyin** — harici kaynağa ters akım koruması yok. |
+
+### ⚠️ Kart kılavuzundaki hatalar
+
+- **§1 kartın Ethernet'i olduğunu ve tarayıcıdan kontrol edilebileceğini söylüyor. Bu YANLIŞ** —
+  XMC4200'de Ethernet MAC yok, malzeme listesinde PHY yok. XMC4400 kılavuzundan kopyalanmış.
+- Tablo 9 `CAN_RX`'i P14.0 gösteriyor; Tablo 4 ve Şekil 7 **P14.3** diyor (doğrusu bu; P14.0
+  potansiyometre).
+
+### Hazır hareket kontrol yazılımı durumu
+
+**Hiçbiri XMC4000'i hedeflemiyor** — grblHAL, FluidNC, Marlin, Klipper: dördünün de sürücü
+listesinde XMC yok. DAVE 4.5'in 106 APP'i içinde step motor APP'i yok. Infineon'un XMC4000 için
+step motor uygulama notu yok. Bu, **sıfırdan yazma kararının dayanağıdır**.
+
+**Kaynak:** [`datasheets/xmc4200/`](../datasheets/xmc4200/) ·
+Pin haritası ve zamanlayıcı ayrıntıları: [elektrik](03-elektrik-baglanti.md) ·
+[firmware mimarisi](08-firmware-mimarisi.md)
 
 ---
 
