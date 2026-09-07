@@ -1,0 +1,740 @@
+ 
+ Arduino CNC Shield V3.XX – Assembly Guide | Protoneer.co.nz 
+ Blog 
+ Forum 
+ Protoneer Shop 
+ Projects 
+ GRBL Arduino Library 
+ Arduino CNC Shield - 100% GRBL Compatible 
+ Arduino MORE-CORE Shield - Multi-core Setup 
+ Contact Us 
+ Search for: 
+ Protoneer.co.nz 
+ Electronic Prototyping Specialists 
+ Arduino CNC Shield V3.XX – Assembly Guide 
+ 2013/09/29 5:25 pm / Bertus Kruger 
+ This is a quick guide to help with assembling the Arduino CNC Shield V3.XX. 
+ We also have a discussion forum for this board :  http://forum.protoneer.co.nz/viewforum.php?f=6 
+ Contents: 
+ Assembly Steps 
+ First Run 
+ Jumper Settings. 
+ 4th Axis Configuration 
+ End Stop Configuration 
+ Configuring Micro Stepping for Each Axis 
+ First step is to solder the Power Wire( or Fuse) and 10K (R1) resistor in place. (Version 3.03 and on does not need the Power Wire anymore.) 
+ Reset button is next. 
+ Majority of the assembly work is soldering the provided header pins in place. For me the easiest way is to start with pins on one side and work to the other side. By doing this the board will lean-to one side forcing the next pins you are working on to be inserted all the way into the board (Ready to be soldered in place). 
+ Because of the height of the capacitors needed, we decided to mount them horizontally utilizing all the space under the stepper drives. This also leaves a bigger gap between the capacitors and the stepper drivers allowing more ventilation.
+ To mount the capacitors horizontally start by bending the capacitor leads 90 degrees. 
+ Then solder them in place making sure that positive lead is on the side with the " + ". Capacitors are usually marked with a " - " indicating the ground/negative lead. 
+ Before soldering the stepper driver headers in place it might be easier to solder the Arduino headers in place. I usually do it by inserting the headers into an Arduino board and then by placing the shield on top of them before I soldering them in place. This ensures that the headers are always aligned and straight.   
+ Last bits are to Solder the Stepper driver headers in place. I use the same principle as with the Arduino Board to align the Stepper Driver headers.  
+ Last but not least is to install the screw terminals for the power. 
+ WARNING 
+ The Arduino CNC Shield supports power supplies up to 36V. That does not mean that all Pololu Stepper drivers can run that high. A4988 drivers are not designed to run at 36V and will blow up the first time you power them up at that voltage. The 36V are for drivers like the Pololu DRV8825 that can run on +36V. 
+ First Run 
+ To make sure all parts function as they should, we need to go through a pre-flight checklist. 
+ Pre-flight Checklist 
+ Do a visual check of all soldered points on the new board. 
+ Plug the shield into an Arduino board with a pre-installed copy of the GRBL Firmware. 
+ Open up a serial connection to the Arduino board and check if  GRBL  is running.(I use  Putty  to connect to GRBL) 
+ Pololu stepper drivers need adjustment and it’s good to have a read through their online manuals at  Pololu.com 
+ Testing each stepper controller socket individually is critical.
+ Make sure the external high voltage power is not power-up or connected 
+ Connect a stepper motor to the stepper controller socket you want to test. This is very important because the Pololu Stepper drivers are designed to ramp up the current till it reaches the needed current to run. Without a stepper motor connected there will be nothing to consume the current and you can end up damaging the stepper driver if it over-heats in the process. 
+ Next, install the stepper motor driver ensuring that the  enable pin  on the driver aligns with the enable pin on the shield. 
+ Connect the external power to the shield, making sure you connect the power up the right way.  If not connected the right way you can cause damage to the shield, stepper motor drivers and Arduino board . 
+ Send a g-Code to the Axis you are testing. The stepper motor should move if everything is working. (GCode Example : “G1 X5? or “G1 X0? or “G1 Y5?) 
+ Repeat the above process with each axis using the same stepper driver.(Testing with one driver reduces the risk of damaging multiple stepper drivers at the same time.) 
+ After all the above have been checked connect all the drivers and power up the system. 
+ Tips and info 
+ When the stepper drivers are enabled they will make funny vibrating noises. This is normal. For more details have a look at this  wiki page(Chopper Drivers) . 
+ The stepper drivers will get warm and need cooling if they are going to be used for long periods. Small heat sinks and extractor fans are advised. 
+ Having extra stepper drivers is always handy. 
+ Some of the stepper drivers have thermal protection and will cut out if the temperature gets to high. This is a good sign that they need cooling or that they are over powered. 
+ Jumper Settings 
+ Jumpers are used to configure the 4th Axis, Micro stepping and endstop configuration. 
+The next few sections explains how its done. 
+ 4th Axis Configuration 
+ Using two jumpers the 4th axis can be configured to clone the X or Y or Z axis. It can also run as an individual axis by using Digital Pin 12 for Stepping signal and Digital Pin 13 as direction signal. (GRBL only supports 3 axis's at the moment) 
+ Clone X-Axis to the 4th stepper driver(Marked as A) 
+ Clone Y-Axis to the 4th stepper driver(Marked as A) 
+ Clone Z-Axis to the 4th stepper driver(Marked as A) 
+ Use D12 and D13 to drive the 4th stepper driver(Marked as A) 
+ End Stop Configuration 
+ By default GRBL is configured to trigger an alert if an end-stop goes low(Gets grounded). On the forums this has been much debated and some people requested to have active High end-stops. The jumpers in the picture provides the option to do both. (To run with default setting on GRBL the jumper need to be connected like the left shield in the image below)(This Jumper was only introduced in Version 3.02) 
+ End-stop switches are standard "always open" switches. An End-stop gets activated when the end-stop pin connects to ground(When setup with default GRBL settings). 
+ Configuring Micro Stepping for Each Axis 
+ Each axis has 3 jumpers that can be set to configure the micro stepping for the axis. 
+ In the tables below High indicates that a Jumper is insert and Low indicates that no jumper is inserted. 
+ Pololu A4988 Stepper Driver configuration: 
+ MS0 
+ MS1 
+ MS2 
+ Microstep Resolution 
+ Low 
+ Low 
+ Low 
+ Full step 
+ High 
+ Low 
+ Low 
+ Half step 
+ Low 
+ High 
+ Low 
+ Quarter step 
+ High 
+ High 
+ Low 
+ Eighth step 
+ High 
+ High 
+ High 
+ Sixteenth step 
+ Pololu DRV8825 Stepper Driver configuration: 
+ MODE0 
+ MODE1 
+ MODE2 
+ Microstep Resolution 
+ Low 
+ Low 
+ Low 
+ Full step 
+ High 
+ Low 
+ Low 
+ Half step 
+ Low 
+ High 
+ Low 
+ 1/4 step 
+ High 
+ High 
+ Low 
+ 1/8 step 
+ Low 
+ Low 
+ High 
+ 1/16 step 
+ High 
+ Low 
+ High 
+ 1/32 step 
+ Low 
+ High 
+ High 
+ 1/32 step 
+ High 
+ High 
+ High 
+ 1/32 step 
+ Example of full micro stepping (All 3 jumpers inserted for all axes ): 
+ Related Posts Arduino CNC Shield - Assembly Guide Protoneer CNC Shield + Alamode + Raspberry Pi CNC Controller Arduino CNC Shield Project Builds - Turning a A3 Printer into CNC Machine Raspberry Pi CNC Challenge - Update Raspberry Pi CNC Challenge Arduino CNC Shield - 100% GRBL Compatable Raspberry Pi CNC Board / Hat Robot of the week : Pick and Place machine Sovrn 
+ Share this: Facebook Twitter Like this: Like Loading... 
+ Posted in: Arduino , CNC , Shields / Tagged: Arduino CNC Shield , CNC , Pololu , Stepper Driver 
+ 124 Thoughts on " Arduino CNC Shield V3.XX – Assembly Guide " 
+ johan den dulk on 2013/10/21 at 7:47 am said: 
+ Hi I wanted to know what the end stops xyz 
+how to connect it please email me 
+circuit connection example 
+ Bertus Kruger on 2013/10/21 at 9:21 pm said: 
+ Afterwards, once you decide that you're ready or would like to enable homing and/or hard limits, you'll need to connect a normally-open limit switch to each of the limit pins (D9-D11). Homing and hard limits use the same switches. These limit pins are already held high with an internal pull-up resistor, so all you have to do is wire them to ground. So when you close a switch, the switch will pull the limit pin to ground. If you'd like to have hard limit switches on both ends of travel of an axis, just wire two limit switches in parallel to the axis limit pin and ground. That's it! Just make sure you have the switches installed before attempting to perform a homing cycle. 
+ Pingback: Arduino CNC Shield - 100% GRBL Compatable | Protoneer.co.nz 
+ Jm-M3u63r on 2013/11/08 at 5:11 am said: 
+ I do not like the end-contacts that close to reporting limits. 
+Indeed, if a wire disconnects, cut or is broken: bye-bye safety! 
+ The best protection is achieved by linking the two switches "normally closed" which cause the stop opening the circuit. 
+ In this way, if a wire is broken or disconnected, the cnc freezes immediatly at safety state. 
+I think the easiest and most effective is the program detects the discontinuity before each move&#8230;. 
+ Ideally, we could use these 3 entries to define the origin of each machine axes X, Z and Z; "home" Cnc? 
+Exceeding the limit causes an immediate stop, as would the emergency switch&#8230; And by using only one input for both! 
+ (Sorry for my bad English) 
+ Bertus Kruger on 2013/11/10 at 4:51 pm said: 
+ Hi. 
+ Thanks for your comments. Currently GRBL only supports "Normally Open" end stops as decided on by the head developers of the software. The Pins are configured with internal pull-up resistors and will only activate the interrupts on a state change(Grounding it). 
+ This however does not stop you from writing your own code that will use "Normally Closed" end stops and splitting one of the 5V pins on the current board to work with it. 
+ Hope this answers your question. 
+ Sakhir Bachri on 2013/12/16 at 3:14 pm said: 
+ HI, I am newbie on arduino and I like to make CNC with Arduino uno. 
+ About normal open switch design grbl, I think can install normal close with put inverted logic, this by transistor or TTL/CMOS inverter logic before Arduino pin. 
+ At persent I am waiting some material and I like to test ArduinoCNCN end this month. 
+Thanks a lot for all information. 
+Regards. 
+ Bertus Kruger on 2013/12/16 at 9:36 pm said: 
+ Hi. 
+ There are a few people that have converted GRBl to use Alwasy closed switches. Currently my shield only has pins for Normally open switches but I am 
+working on a revised version that will allow you to pick between normally open or normally closed switches, 
+ Good luck with the build and have fun. 
+ Regards, 
+Bertus 
+ Magnus persson on 2014/01/08 at 7:47 am said: 
+ hello. have just built this shield. small query regarding tex y.step / dir what does it mean? en / gnd what does it mean 
+ Bertus Kruger on 2014/01/08 at 9:26 pm said: 
+ Hi. The EN/GND to 5V/GND row of pins are for connecting external stepper drivers to the board. The EN stands for enable and X/Y/Z/A.Step-Dir is the step and direction signal for each axis. 
+ Thomas Lunzer on 2014/01/10 at 9:39 pm said: 
+ Hi Bertus! 
+Nicely made and super cheap! works great!! 
+Only one question: 
+How can I use the the A-axis. As far as I know original grbl firmware does not support an A-axis. As far as I understood from browsing the code, all step/dir pins have to reside on the same port, which I guess is not possible on the uno, only on the mega Arduino. 
+Greets from Austria! 
+Tom 
+ Bertus Kruger on 2014/03/01 at 6:00 pm said: 
+ Hi Tom, 
+ The A-Axis is mostly used to clone X,Y or Z. But it can also accessed from pin 11 and 12 with custom software. 
+ mathias Mahler on 2014/02/04 at 7:31 am said: 
+ hello 
+i have 3 of this one 
+ http://www.pololu.com/product/1182 
+can i use it with the board? 
+regards 
+ Bertus Kruger on 2014/03/01 at 6:02 pm said: 
+ Yes&#8230; This board was designed for them. 
+ mathias Mahler on 2014/02/04 at 7:38 am said: 
+ i mean because of the naming you made on the X-AXIS field 
+ B2 
+B1 
+A1 
+A2 
+ but the drivers in post above have other pin namings 
+ 2B 
+2A 
+1A 
+1B 
+ or is it my decision? 
+ Bertus Kruger on 2014/03/01 at 6:03 pm said: 
+ Hi. The first letter is the coil and the second letter is the lead. Same thing just a different notation. 
+ rangel on 2014/02/13 at 5:43 am said: 
+ Hi 
+I have a problem..I have cloned the Y axis, I have two motors in this axe. 
+One motor running in one direction and the other runs in another direction. 
+I use 4 pololu a4988 , can you help me?? 
+thanks! 
+ Bertus Kruger on 2014/02/13 at 6:47 am said: 
+ Hi. To fix this you can swap one of the stepper motor cables around. That will invert the stepper direction. 
+ rangel on 2014/02/13 at 8:01 am said: 
+ thanks! I solved the problem !! I swap one of the stepper motor and all is ok now. 
+But I have another problem , more serious, two pololus have been burned, in the same socket, the x axis. The only noteworthy aspect is that one of the capacitors came beaten and put this capacitor on the x axis&#8230; is it possible??? 
+The cnc works fine a minutes but then x axis don't work. 
+I have put a big sink allways (12v). 
+thanks for all 
+ Bertus Kruger on 2014/02/13 at 8:41 am said: 
+ First thing to note&#8230; never disconnect the steppers while the stepper drivers are powered. Doing that will over current the driver and could kill it permanently. 
+ Best would be to double check the soldering on the x axis and replace the Cap incase its the issue. (Be sure to put the cap the right way around) 
+ rangel on 2014/02/13 at 7:35 pm said: 
+ thanks for awnser. 
+I never disconnect the steppers when it is powered. 
+The soldering is ok - I started to solder 10 years ago-, I don't think this is the problem. The cap is in the right way&#8230;. I'm going crazy&#8230; 
+This afternoon I will replace the capacitor&#8230; but is possible that this is the problem ??? the capacitor??? 
+ thanks for all!!! best regards! 
+ rangel on 2014/02/18 at 8:28 pm said: 
+ hello all! 
+ I replaced the capacitor and all is ok! 
+ thanks for all!!! 
+ Bertus Kruger on 2014/03/01 at 6:07 pm said: 
+ Great stuff!! Regards. 
+ rangel on 2014/02/13 at 8:56 am said: 
+ Yes I know , I don't disconnect the steppers while the stepper drivers are powered. 
+ I have checked the soldering&#8230; and the cap is in the right way. 
+ When I swap the pololu on the x axis works fine, but I'm worry to damage another pololu (I have only one pololu replacement. 
+ thanks 
+ Luc De pauw on 2014/04/10 at 1:51 am said: 
+ I've bought the elecrow version of the board, I tried to use a pololu drv8825 which on the pololu site said its a drop in replacement for A4988 but the attached stepper does not move nor draw any current&#8230;.any help appreciated&#8230; 
+ Bertus Kruger on 2014/04/16 at 9:46 am said: 
+ Hi. Have a look at setting $15 in GRBL. It might be that it needs inverting to enable it&#8230; Please let me know how it goes. 
+ Luc De pauw on 2014/05/03 at 11:47 pm said: 
+ There are 2 versions of the pololu DRV8825 a first version which has item nr 2132 and a second version with item nr 2133. The first one is missing the middle resistor on the bottom and needs some extra resitor attached to the sleep line. The second version works out of the box. All is working now, only had to reverse the stepper lines order for the X axis, Y and Z were identicial, I used 3 identical pololu steppers with the same wire color. I'll soon post about my setup on my blog. 
+ Bertus Kruger on 2014/05/07 at 6:58 pm said: 
+ Thanks for the commnet. Yes, the first version, VERSION A needed a bit of help running but they work well once they are up. Looking forward to seeing your blog. 😉 
+ Mat Helm on 2014/04/15 at 4:27 pm said: 
+ What exactly dose this mean?!? 
+ "In the tables below High indicates that a Jumper is insert and Low indicates that now jumper is connected." 
+ Doesn't "insert" (as in inserted) mean connected? 
+ Bertus Kruger on 2014/04/16 at 9:33 am said: 
+ Hi. I have updated the wording. Inserted and connected is the same thing, yes. A jumper's function is to act as a removable connection between pins. 
+ GP on 2014/04/16 at 3:18 am said: 
+ The site and documentation makes mention of a 4th axis with custom firmware. What would the custom firmware option be to run a 4th axis with this? And what type of 4th axis could it support, if grbl doesn't support a 4th axis yet? 
+ Bertus Kruger on 2014/04/16 at 9:38 am said: 
+ Hi Gregory&#8230; 
+ With Custom firmware I mean non-GRBL firmware. In the past I have written little apps that moved all 4 axes independently but nothing as complicated as GRBL. 
+ Regards. 
+ Art Mielke on 2014/04/16 at 7:45 am said: 
+ My 13YO Daughter is about to put 2 of your kits together, it will not be the first kit for her. 
+Some thoughts; 
+Why no schematic? How to decide fuse/wire with no schematic or explanation? 
+Why not a PDF of these instruction, some of us don't have good internet in all the location that we work&#8230; 
+Looks good otherwise so far 
+ Thanks 
+ Bertus Kruger on 2014/04/16 at 9:22 am said: 
+ Thanks for the feedback. Schematics is available : https://blog.protoneer.co.nz/arduino-cnc-shield/arduino-cnc-shield-scematics-v3-xx/ 
+ Version 3.01 and up does not use the fuse wire anymore. (I take it you have version 3.03) 
+ PDF is a good idea. I have updated the site over the last few days and it would have been very helpful to have that. (I am also looking at upgrading to a wiki) 
+ Do you have a project page? Kind regards. 
+ Gerd Lobmeyer on 2014/04/26 at 12:41 am said: 
+ Hi, I already ordered the V3 now. Sorry, it's embarrassing, but where do I connect the motors on the board? 
+Kind regards 
+ Bertus Kruger on 2014/04/26 at 10:19 am said: 
+ Hi. No worries. If you look at the following picture of the shield&#8230; https://blog.protoneer.co.nz/wp-content/uploads/2013/07/Arduino-CNC-Shield-V3-Layout.jpg 
+On the right of each stepper driver socket are 4 pins. These are the connections that go to the stepper motors. The X axis socket has marking to show how each coil 
+on the stepper needs to be connected. 
+ Vilo on 2015/12/29 at 7:21 am said: 
+ Hi, I am trying to connect motors. My bi-polar Nema 23 motor has 4 wires sticking out of it. On your shield you have markings next to the place where motor goes that say B2,B1,A1,A2. I am assembling my own Dupont jumpers. How do I know which cable from motor goes to which pin? Thanks! 
+ Bertus Kruger on 2015/12/30 at 1:22 pm said: 
+ Have a look at : https://blog.protoneer.co.nz/stepper-motors-wiring-up-a-bipolar-stepper-motor/ 
+ B2 and B1 is a coil and A2 and A1 is a coil. To reverse direction jsut swap the coils around. 
+ Gerd Lobmeyer on 2014/04/26 at 12:56 am said: 
+ Hi, an addition question. Is it possible to connect this controller to the shield? 
+ http://www.ebay.de/itm/CNC-Manual-3-Axis-Handle-Controller-For-3-Axis-TB6560-Stepper-Motor-Driver-Board-/360730100023?ssPageName=ADME%3AX%3ADERP%3ADE%3A1123&#038;ViewItem=&#038;item=360730100023&#038;nma=true&#038;si=iWhacZJK9znWOx6hT936gXw%252F1Hc%253D&#038;orig_cvip=true&#038;rt=nc&#038;_trksid=p2047675.l2557 
+ Thank you 
+ Bertus Kruger on 2014/04/26 at 10:15 am said: 
+ Hi. That pendent looks like it was designed specifically for the board it is used with. I don't think it will work with the shield and modifying it will be as good as redesigning it.. 😉 
+ Gerd Lobmeyer on 2014/04/27 at 12:15 am said: 
+ Hi, thank you. Now I saw how the stepper needs to connect. I didn't saw the labels beside the X axis. 
+ The controller I thought has a standard connection like a game port. I thought it will be helpful to have a possibility to move the axis manually. 
+ Sorry, but I have an other question now. I ordered 3x A4988 driver for the shield. Which power (volt) and min. ampere do I need for that? I want to upgrade my proxxon mf70 milling machine to cnc. So there are three axis to move. 
+ Again, sorry for such rookie questions. 
+Regards 
+ Bertus Kruger on 2014/04/27 at 9:29 am said: 
+ Don't worry about the questions. The are all valid&#8230; 🙂 
+ The firmware used : GRBL ,does not at this stage allow for a lot of manual control at this stage. It has pause, resume and abort. So it will need a lot more magic to make the controller do anything else but it is a pretty cool idea though.(Might look at some option in the future.) 
+ Power supply wise&#8230; The A4988's run on 8-35V DC. My suggestion would be to get an old PC power supply to start with. They usually have some beefy 12V rails that can supply plenty of AMPS. 
+To calculate the current usage is easy. Each driver can do a max of 2. So if you are going to use 3 go for a 6A power supply and maybe 8A for good luck. Having a power supply that has more Amps than needed means that the power supply will be under less stress and run cooler. 
+ When you start getting into bigger stepper drivers it gets more interesting. Some Stepper drivers can do over 8A and having a power supply that is +24A gets very expensive. So they usually take into consideration that not all 3 axes will run at the same time and can then get away with a smaller power supplies. All depends on what you are going to do. 
+ If you have more questions, please go ahead and ask. Kind regards.. 😉 
+ Gerd Lobmeyer on 2014/04/27 at 10:00 pm said: 
+ Thank you very much for the detailed answers. One last question until I got the part in my hands. Is the Arduino powered from the shield or is it powered separately? 
+ Bertus Kruger on 2014/04/29 at 8:43 pm said: 
+ Hi, The Arduino is powered separately. 😉 
+ Giorgos Amoiridis on 2014/08/06 at 3:09 am said: 
+ hi and thank u for all your work . my first question was answered above as to where to connect my stepper . second question is a clarification actually : i have v3.03 (i think ) bought from ebay , drv8825 driver bought on ebay ( no pololu but chinese replicate ) and nema 17 12v 1,3a stepper . in drv 8825 schematic the connectors for steppers are from the opposite that u make them on your board . i looked in all your pics and u allways have the trimmer side of drv facing the 12-36v connector . is it like this ? dont wanna dmg the driver or my stepper as i run a very tight budget 
+ thank u in advance 
+ greetings from sunny greece 🙂 
+ Bertus Kruger on 2014/08/06 at 9:00 am said: 
+ Welcome Giorgos from sunny Greece&#8230; 🙂 
+ On the back side of the drivers there should be indicators of what each pin does. Look for the enable/EN pin on the driver and make sure that it goes into the pin on the Shield with the marking EN and you should be okay. 
+ Giorgos Amoiridis on 2014/08/07 at 4:26 am said: 
+ thank u , will do and get back to u with results 
+ Jeferson Simões on 2014/08/11 at 2:53 am said: 
+ Hello, here's from Brazil. 
+I got 4 boards from Elecrow, Ver. 3.01, to test, and determine if I should use it in all machines that I will sell soon., to buy more. 
+The Elecrow have the last Ver. 3.03? 
+ My system uses the DRV8825 with a 36V power supply. Pulley 20 teeth, GT2 belts 3mm, and Nema 23 (2A parallel bipolar) Steppers. I reach 20,000 mm / min in search =] 
+I'm using a Openbuilds system, like a OX Cnc machine, with some custom plates/design. 
+ But I am having problems after installing your cnc shield. I guess it's about the Enable/Reset/Sleep/Fault pins. 
+All DRV8825 pins are connected to the CNC Shield. It's the new one, md20B. 
+ I tryed to change the "(invert step enable, bool)" GRBL. 
+ If I keep $15 = 1 (in fact, I'm with GRBL V0.9, then it's $4 = 1), the steppers hold. But when I sent a move command, the steppers shuts down. There's no movement, and I can spin the stepper freely with hands (until the command ends, then the motor hold again). 
+ If I come back to the default, keeping $15 = 0 ($4 = 0), the stepper is turned off, ie, there is no hold. But it turn on when sending commands +/- axis. The axes move, but when they stop, they shuts down, and can't hold again. 
+ I always used these DRV8825 in the simple way to run, without endstop, etc, using this connection diagram: http://b.pololu-files.com/picture/0J4232.600.png 
+ Enable/Fault = Disconnect 
+Reset/Sleep = +5V 
+ What do you think? I have to disconnect some of this four pins? 
+I have the Ver. 3.01. 
+ Thanks to make this board, and to Elecrow for send it full assembled. 
+ps: Do you know where I can buy the 8825 full assembled too (pins welded), and maybe with the heat silk glued? I hate to weld electronics, and I love plug-n-play systems. 
+ jeferson (at) protoptimus (dot) com (dot) br 
+ Bertus Kruger on 2014/08/11 at 9:24 pm said: 
+ Hi. 
+ What you are describing is normal. GRBL will go into idle mode after set amount of time. This can be changed by setting $7 - Step idle delay to 255. It will keep the steppers enabled at all times. Just keep in mind that this could cause things to get very hot. Not sure about assembled stepper drivers but Ebay is a good place to start. 
+ Jeferson Simões on 2014/08/18 at 6:42 am said: 
+ Thanks! I never used the enable pin before. Now it's perfect. 
+ Do you know if is possible just turn on/off a 3 phase spindle with the Grbl? I got the chinese one, with the Huanyang Inverter (HY01D523B). 
+ I tried this: http://www.shapeoko.com/forum/viewtopic.php?f=3&#038;t=2689#p20719 
+ Bertus Kruger on 2014/08/25 at 7:39 pm said: 
+ 🙂 Sorry I am not sure about the 3 phase spindle as that sounds more like a question for certified electrician. 
+ heno on 2014/08/25 at 6:43 pm said: 
+ Hi, on this board the pin of " SpnDir ". How can i connect and control the spindle to this pin? Thank you. 
+ Bertus Kruger on 2014/08/25 at 7:42 pm said: 
+ To use this you need a spindle that uses an 5v input to control the direction. The spindle enable pin can be used with a relay to switch an AC spindle. 
+ tonc on 2014/09/12 at 9:30 pm said: 
+ Hello, 
+ I'm a total newbie at this, and I would like to know how to connect the pins below the capacitors and more importantly, where and with what to connect them in case I would like to set up half step mode. You showed the picture with full microstepping but I can't really help myself with that, because you probably have to wire things up&#8230;. 
+ Sorry for dumb questions, but I'm a Mech. eng. and not electrical and rarely work with electronics&#8230; 
+ Regards 
+ tonc on 2014/09/12 at 11:46 pm said: 
+ I managed to make the half step setting, I see it is totaly easy&#8230; 
+ What I am wondering is how complex shapes can you make with Arduino Uno, I mean Arduino UNO is one of the weakest (besides duemilanove) on the market and I don't know how easy is it for interpolating several complex shapes at once? 
+ Can the same shield be used with lets say Arduino Mega? Or should there be made any additional changes with wiring? 
+ Regards 
+ Bertus Kruger on 2014/09/15 at 9:02 pm said: 
+ Hi. You will be surprised at the capabilities of the ATMega328P&#8230; 🙂 
+ GRBL that runs with the CNC shield works from steaming G-Code. What that says is that the complex drawings you are talking about gets broken down into a file with hundreds of lines of commands to make movements and that is then sent to the Uno one command at a time ending up with a complex design being machined. The shield should be okay with the Mega but the software does not official support it. My suggestions is to give it a try on the UNO before you look at other options&#8230; Kind regards. 
+ Wattage on 2014/10/12 at 6:58 am said: 
+ First off, thanks for designing an awesome controller, and for your prompt customer support in previous user questions. 
+ I have constructed the controller and now I'm trying to plan the motor wiring. My motors are rated at 3A per phase and the DRV8825 drivers are rated at 2.2A each. My questions are: 
+What gage wire should be used connecting the 4 pin axis headers to the motor? What is the current rating for the headers? Also, would the 2.2A current be divided by the 4 pins, or would each pin receive the full current since it is pulsing through each to move? 
+ Thanks for the help! 
+ Wattage on 2014/10/12 at 7:00 am said: 
+ Ah. Also wanted to add that my system is running on 24V. Voltage is always a relevant consideration when discussing power ratings 😉 
+ Bertus Kruger on 2014/10/17 at 8:29 pm said: 
+ Voltage is actually not so important with these Chopper drivers. They will ramp up the voltage till they get to the set current and then cut the power. That is also the reason why they are so noisy and why the steppers can be run at multiples of the rated voltage. 
+ Bertus Kruger on 2014/10/17 at 8:27 pm said: 
+ Sorry for the late reply and thanks for the email. The headers for the stepper motors are rated at 2amps each. The max current is actually dependant on the female headers that are used with the stepper wires. Cheaper molex connectors are rated at 1amp with more expensive versions rated at 3amps. 
+ The problem you are facing is that at max amps things get noise and it is better to solder the cables in place than to have removable headers. 
+ The DRV8825 might be rated at 2.2Amp but it would be hard to run them stable at that current. They are very sensitive to heat and will need cooling. There is also the the quality issue with Pololu drivers being better designed to deal with heat than some of the Chines versions. 
+ As for the question on current per pin. Biopolar steppers have two coils and when doing full steps one coil will be fully powered and one not. My assumption is that two of the pins will be sharing the up to 2.2amps of current at a time. With micro-stepping on average this load is shared over the 4 pins because at 1/2 steps the coils will be sharing the power at 50% per coil. 
+ Picking the right wire is pretty simple, make it at least as thick as the wire coming from the stepper as the installed wire will be defining factor. 
+ 3Amp steppers are actually not the most efficient steppers for these stepper drivers. Best would be to go for steppers rated at 2 or just below that. If you really want to drive 2amp and up I would suggest looking at Gecko stepper drivers. 
+ hyppyayo Nico on 2014/10/17 at 5:58 am said: 
+ hello bertus, 
+could you tell me where i can buy a spindle for this shield? what about wiring? 
+ Bertus Kruger on 2014/10/17 at 8:35 pm said: 
+ Its a bit of a "how long is a string" question. I am looking at using motors used for RC cars. The brushless motors from Hobby King are pretty good and run at +10K rpm. Things that does set spindles appart are how much side forces they can take and how long they can run without over heating. I have been tempted by this monster for a while : 
+ It is water cooled and if you power it correctly will go well over 40K rpm. 
+ hyppyayo Nico on 2014/10/17 at 10:21 pm said: 
+ hello, my ask is&#8230; i see in the shield there is SPNen and SPNdir, ho could i wire a simple 2 wire DC motor? Only use the SPNen? 
+ Bertus Kruger on 2014/10/22 at 4:38 am said: 
+ Best is to use a relay with the motor. The DC motor needs more current than and Arduino can provide from its IO pins. There are plenty of relay board available that are 5v compatible. 
+ Andrew on 2014/12/18 at 2:55 pm said: 
+ Hi Sorry to sound a little dumb&#8230; But can you confirm that SpnEn on the shield "connects to" Arduino pin 12? Also why are there two pins each for SpnEn, SpnDir, etc. Is one of them Gnd? If so which one. I am hoping to switch the spindle on and off via software and a spindle control board. 
+ Bertus Kruger on 2015/01/28 at 11:46 am said: 
+ Have a look at this link. It depends on the version of GRBL you are running. 
+ Andrew on 2015/01/30 at 7:31 am said: 
+ Thanks Bertus but unfortunately I do not see a link in your post 
+ Andrew 
+ Bertus Kruger on 2015/02/07 at 6:55 pm said: 
+ sorry for that&#8230; https://github.com/grbl/grbl/wiki/Connecting-Grbl 
+ powercycle on 2015/01/14 at 7:25 pm said: 
+ In step 5D you say to "make sure you plug the power in the right way". What is considered the right way? 
+ My thought is that I could use a PC power supply and connect the -12V and +12V to that blue connector. 
+ Would this be the right way? 
+ Bertus Kruger on 2015/01/14 at 8:24 pm said: 
+ A PC power supply can be used. On the blue connector, connect the "-"(ground) up to the Black wire side of 12V and the "+"(positive) up to the yellow wire of the 12V side. 
+ powercycle on 2015/01/15 at 3:51 pm said: 
+ Great Thanks! After checking that there is indeed voltage coming out of the power supply, and connecting it up to the board, I can't get the board to spin the motor. I'm issuing the commands given above "G1 X5?" but the motor doesn't move. 
+ What can I do for further testing? 
+ Bertus Kruger on 2015/01/28 at 12:01 pm said: 
+ Is GRBL reporting position back? This seems like it might be a GRBL settings issue. 
+ powercycle on 2015/01/28 at 12:52 pm said: 
+ This now works&#8230;I had to use G0 X1.0 to get it to move&#8230;. 
+ Bertus Kruger on 2015/01/28 at 1:05 pm said: 
+ Excellent&#8230; 😉 
+ Dimitri on 2015/02/24 at 1:07 am said: 
+ Hello I bought a uno + cnc shield + (4) A4988; for a laser engraver; is it possible to use SpnEn pin to fire the laser?? I´m new to the whole thing, so forgive my ignorance please, if you have a better suggestion, please! 
+ Regards 
+Dimi3 
+ Bertus Kruger on 2015/02/24 at 4:55 pm said: 
+ It is possible yes. Have a look at this discussion for more detail. https://github.com/grbl/grbl/issues/325 
+ Hung Tran on 2015/08/05 at 5:10 am said: 
+ hello Bertus Kruger. i'am using cnc shield + arduino + laser. but i don't know how to connect laser into cnc shield. 
+Can you help me? 
+( 
+ Bertus Kruger on 2015/08/06 at 8:01 pm said: 
+ Hi. It if its a simple on/off laser all you have to do it to connect the laser enable pin to the spindle pin on the board. Arduino pins are low current and will not power a laser, so use some kind of relay or transistor to drive more power. 
+ amol on 2016/01/10 at 11:46 am said: 
+ Hi, 
+I have uno 328, with cnc shield with grbl 9h. I connected to z-/GND pins laser driver. 
+But I have some problem with on/off procedure swithing laser. 
+When I send Laser ON - M3 command i get 5v (z+z-) and laser no burning 
+When I send Laser OFF - M5 command i get 0v (z+z-) and laser start burning 
+Also PWR working reverse when is 0 (0v z+z-) laser is ON when i send 255 (5v z+z-) then laser OFF 
+ Do you know method to reverse that? 
+ Wiktor 
+ Bertus Kruger on 2016/01/11 at 8:18 pm said: 
+ Have a look at the config.h file. It has "INVERT_SPINDLE_ENABLE_PIN" that needs to be uncommented before uploading to reverse the spindle pins. 
+ Pingback: CNC-SHIELD-3.00 | ZDVstore 
+ stefaan on 2015/03/14 at 12:05 pm said: 
+ Hello Bertus i bought the protoneer cnc shield , is it possible to controle the cnc spindle motor with VFD like this one : http://www.jinlantrade.com/Stock%20files/0008.jpg 
+ https://www.buildyourcnc.com/item/electronicsAndMotors-parallel-breakout-relay#prettyPhoto/4/ don't now with wire to connect to cnc schield . 
+thanks in advance 
+kind regards 
+stefaan 
+ Bertus Kruger on 2015/03/14 at 1:42 pm said: 
+ From what I can see it might not be that easy. Correct me if I am wrong but VFD does not run at TTL/5V levels? 
+ With the GRBL v0.9 there is now an option to do spindle control with PWM, that might be an option but if it runs other voltages you will need a converter first. 
+ Bernard on 2015/04/12 at 10:18 am said: 
+ Hi Bertus, 
+ I just assembled today my first CNC Shield. Went well. Then I started to follow your "pre-flight" checklist, checked that grbl was still working fine with the shield plugged, then started to send commands to X, as it's where I plugged the pololu. 
+ I heard a distinct sound of stepper enabled, but no movement. 
+ Then I tested Y and Z, there the motor (same one) moved. 
+ Then I decided to test A, cloning Z. Same as before, no move 
+So I tried, still on A, but cloning Y. Works! 
+ I don't have a clue on what to look for! I was thinking I might reflash GRBL, as it seems the problem is in the firmware rather than in the shield. 
+ Ever seen that before? Any idea on some tests I could make? 
+ Thanks in advance! 
+ Bertus Kruger on 2015/04/20 at 2:56 pm said: 
+ Hi. What version GRBL are you running. I noticed that some imports of GRBL 0.9 has the PWM configuration on by default and that will not work with the classic pin layout used with this board. (It swaps the spindle and z-limit pin) 
+ Erick Sauve on 2015/06/12 at 2:48 pm said: 
+ Hi, This is a video of my first run of my CNC machine using 3.03 GRBL shield. In the video, I'm doing only two movements : 100mm travel in y and 100mm travel in x. You can see the machine stop and go many time and there is a very strange noise coming out of the motor controller shield or the Arduino uno. Any clues about the problem? 
+ video : https://youtu.be/t7LtLhKQfGU 
+ thank you 
+ Erick Sauve on 2015/06/13 at 2:01 pm said: 
+ I just found this: the sound does not come from the shield or the arduino. It came from the z stepper. This is strange because no command is send to the z stepper when it's making nose. 
+ Bertus Kruger on 2015/06/14 at 10:33 am said: 
+ Stepper drivers will still power the steppers while they are not moving. Think of belt driven machines, they have very little resistance(z axis will move down because of gravity) and if the stepper is not held in position it will start to turn/move. Does the noise frequency change if you reduce the current setting on that stepper driver? 
+ Bertus Kruger on 2015/06/14 at 10:26 am said: 
+ Hi. What is the stepper driver temperatures like? I know the DRV8825 drivers are very sensitive to heat and I would say running them without heatsinks will be hard. The run , stop can be thermal cut out. These drivers are also pretty noisy when standing still(holding current). Have you tried swapping the stepper drivers, if the swap changes the problems to another axis it could be a driver issue. Also double check solder joints on the problem axis. 
+ fallenDown on 2015/06/13 at 6:49 am said: 
+ Hi if I have V3.00 board that E-STOP jumper at the bottom is this "End Stop" or 
+ "Emergency Stop" and is it fail to safe meaning must it be shorted to GND for the board to work 
+ Bertus Kruger on 2015/06/14 at 10:37 am said: 
+ Hi. The E-Stop is for "Emergency Stop". (End-stops are divided into x,y,z connections). The E-Stop pins can be connected to a "Normally Open" switch else it should be left unconnected. When the button is pressed the System will be rebooted. 
+ Radu Negrutiu on 2015/07/09 at 11:17 pm said: 
+ Hi there, I found a short mention about powering the shield and arduino board but not fully detailed. 
+Do I need to power both, shield and arduino boards from 12V or is it enough to power the arduino from USB and the shield from a 12V(or higher) source ? 
+ Bertus Kruger on 2015/07/18 at 7:23 am said: 
+ Hi. Yes,Powering the Arduino from USB and the Shield from the +12v is the way to do it. 
+ Radu Negrutiu on 2015/07/21 at 11:23 pm said: 
+ Great 🙂 , thanks. 
+ Hart on 2015/07/15 at 12:36 am said: 
+ Hi, I am fixing to configure my first cnc with uno and cnc shield v3. I have a question regarding the changes in grbl 0.9i. Do I just connect spindle to z endstop pins and z endstop to spindle enable pins? Is the current through pins sufficient for 1.7amps spindle draw? I had planned to use a digital relay. Also, I had planned to use high and low endstops. If I just switch the pins, should I wire the endstop switches parallel to one another external to the shield? Any help would be greatly appreciated. 
+ Bertus Kruger on 2015/07/18 at 7:28 am said: 
+ Hi. Yes, those are the only pins that swapped in V0.9i. the pins can only source a few milli amps and needs a transistor to driver higher current.Yes, on the end stops. Keep in mind that GRBL is configured for always open end stops. 
+ Isaac Dias on 2015/07/16 at 1:42 am said: 
+ Hi, Bertus. 
+On the board, i see a CoolEn conector. 
+What that means? 
+Is it a conector for a cooling fan? 
+ Bertus Kruger on 2015/07/18 at 7:21 am said: 
+ Hi Isaac, the CoolEn is an 5v output pin that goes when the Coolant G-Code command is entered. The pin it self can not be used to run a fan as the output pins on Arduino's can't source more than a few milli amps. This pin however can be connected to a relay to switch on a fan. 
+ Tobi on 2015/07/23 at 1:05 am said: 
+ Hi, 
+i´m wondering how to connect any kind of "spindle enable" in grbl 0.9 on the cnc shield!? Do i have to connect the sondle enable to Zx Endstop? 
+ Bertus Kruger on 2015/07/30 at 8:51 pm said: 
+ Yes, you will have to swap the two pins. 
+ Tobi on 2015/08/14 at 5:22 pm said: 
+ I´ve done so, but now i am not able to control my laser relay with M3/M5 anymore&#8230; 
+ Bertus Kruger on 2015/08/16 at 5:22 pm said: 
+ With the default PWM settings enabled you need to run the S command to enable the spindle. From memory S is 0-1000 with S1000 being spindle at 100% power. 
+ Jay on 2015/08/04 at 7:39 pm said: 
+ Hi Bertus thank you for the information here. 
+ I am facing a strange problem with my driver . My Cnc shield is Ver3.03 and driver is A4988 set for Nema17 for shapeoko2. I am using all four driver slots. 
+One of the A4988 driver does not allow the Arduino to turn on, if 32 steps jumper is selected for that specific slot.i.e when m0,m1,m2 is inserted. 
+ but the same driver board work with 4 step setting i.e 1 or 2 jumpers only. 
+So I had to configure my Y axis parameter for 4 steps and rest axis for 32 steps which is awkward. 
+Is it a faulty board or can I do something to enable 32 steps for this particular board I have only 4 driver boards and it takes long time for shipment to reach my place for new drivers. 
+Regards. 
+ Bertus Kruger on 2015/08/06 at 7:58 pm said: 
+ Hi Jay, The Pololu A4988 driver only support up to 1/16th micro stepping. https://www.pololu.com/product/1182 
+ Aiden on 2015/09/09 at 1:06 am said: 
+ Hi, I too am using Pololu DRV8825 drivers but I'm confused about which way round they are supposed to go in this CNC Shield V3 board. 
+ Do they go with the variable resister nearest the bottom of the board (facing towards where it says &#8216;CNC Shield') - like every picture I've seen of the A4988 drivers in situ, or should the variable resister be facing the top of the board (facing towards the &#8216;Reset' side of the board) - this way would match the schematic on the Pololu website, and I have seen some pictures of this layout. Just checking because I don't want to destroy my drivers! 
+ Bertus Kruger on 2015/09/10 at 2:32 pm said: 
+ Check the enable pins align on the board and the stepper driver.(EN) 
+ Aiden on 2015/09/11 at 9:19 pm said: 
+ OK thanks, yep got the steppers to move correctly in each direction. 
+Next question is for the limit switches, is it the Common and Normally open pins on the micro-switches that connect to the end stops on the CNC shield V3? 
+ Bertus Kruger on 2015/09/14 at 9:34 pm said: 
+ yes&#8230; Normally Open switches with shielded cable and a properly grounded machine. 
+ Vicente Chazard on 2015/10/10 at 12:08 am said: 
+ Hi! 
+ I'm complete noob in the Grbl word, but not in the Arduino one. 
+I am trying to connect a CDROM step motor, but can´t manage to have a smooth motion. Each time I send a command it moves but with a lot of hiccups, instead of a nice "ZZZZZZZZZ" noice, I get a "BrrZBrrZBrrZ", and the motion is not clean. 
+ I assume I might need some jumper somewhere and/or need to setup the Grbl with proper values. 
+ Can anyone assist me? 
+ Bertus Kruger on 2015/10/28 at 5:47 am said: 
+ This sounds like it could be the stepper motor wires being hooked up wrong. have a look at https://blog.protoneer.co.nz/stepper-motors-wiring-up-a-bipolar-stepper-motor/ Have you swapped out the stepper driver as another test? 
+ Chris Hardy on 2015/11/04 at 9:09 pm said: 
+ Hi, I've managed to set up my motors with microstepping which was a doddle, I'm new to this though and I'm a little bit unsure how to wire up my optical endstops. 
+ The board has white pins for X, Y, Z, A positive and negative, then next to each of these is a strip of black pins. Are the black pins all to ground? 
+ My endstops have 5v, signal and ground, do I connect the 5v to X+, signal to X- and ground to any of the black pins? Or am I getting this wrong and the X+/- pins are for the switch signals at opposite ends of the X axis? 
+ Sorry if I'm missing something really obvious here, thanks! 
+ Bertus Kruger on 2015/11/15 at 8:57 am said: 
+ The shield uses GRBL(Firmware) and the standard way of setting up end-stops is using normally open switches. End-stops get activated if the get grounded. It sounds like you have some kind of active end-stops if they need power. 
+ Rafael Carvalho on 2015/12/10 at 4:13 pm said: 
+ Hi, i am trying to use my mega 2560 with grbl while i waiting my UNO to arrive. 
+I manage to use the 3.0 version of the shield to spin the motors (without GRBL), but when i try to use GRBL, the motors hold position, i receive an OK when i send a code to move one of the axis, but no movement at all in the motors. I am using universal Gcode sender, and it shows the axis moving in the screen. I also tried using the arduino IDE to send manual code with the same result. Do you know how to make it work? 
+Thanks. 
+ Rafael Carvalho on 2015/12/10 at 4:17 pm said: 
+ Forgot to tell that i am using nema 23 5v 1A with A4988. 
+ Bertus Kruger on 2015/12/16 at 5:20 pm said: 
+ The A4988 drivers needs atleast 8V to work. The Arduino2560 is not officially supported but it could be that the stepper pins are not configured to be the same as on the Uno. 
+ Pingback: Arduino shields and stepper drivers - Jason Conway 
+ David Coetzee on 2016/01/20 at 9:01 am said: 
+ Hi I have a very strange problem on my router cnc shield, i suspect my power supply! after homing z at the top i bring it down onto the pcb and then get a hard limit alarm. if i back the bit off of the pcb i can run the router as normal. 
+I have put a screwdriver in between my bit and the pcb and get the alarm, the funny thing is if i disconnect the limits i get this alarm, once the bit touches the pcb. 
+Has anyone has this problem, i am using a cheap power supply which has no earth connection the primary. 
+The pcb is placed onto superwood and has no form of electrical connection. 
+ Bertus Kruger on 2016/01/20 at 7:34 pm said: 
+ That does sound like a grounding issue. My next release of the CNC shield will have signal filters that might help with this issue.(It will be available from next month) 
+ bibek on 2016/01/21 at 6:46 pm said: 
+ I want to use 4th axis independently can u help me&#8230;how to do it? 
+ Bertus Kruger on 2016/01/28 at 5:51 pm said: 
+ To do that you will have to configure the 4th socket jumpers to the bottom setting. Those pins have Arduino Pin numbers on them that can then be used to write the custom software to run a 4th axis. GRBL does not support 4 at this stage. 
+ Nic on 2016/01/29 at 9:06 pm said: 
+ Hi, bit of a strange problem, my x axis always moves in the same direction, instructions for both directions result in it moving in the same direction. Have tried different motors and they do the same. Swapped the driver to another axis and it behaves properly. 
+Any ideas? 
+Thanks for your help. 
+ Nic on 2016/01/30 at 10:57 am said: 
+ Ended up putting a new atmega into the arduino and that seems to have resolved it. 
+ Bertus Kruger on 2016/03/12 at 4:53 pm said: 
+ We have created a Forum dedicated to this board. For more discussions please do so on the Forum. http://forum.protoneer.co.nz/viewforum.php?f=6 
+ Pingback: CNC Shield Setup and Software - the amateur maker 
+ Pingback: Konfiguracja MotorSteper Shild - rc0 
+ Post Navigation 
+ &larr; Previous Post 
+ Next Post &rarr; 
+ Top Posts & Pages 
+ Arduino CNC Shield - 100% GRBL Compatable 
+ Arduino CNC Shield V3.XX – Assembly Guide 
+ GRBL’s PWM functionality – How to control a laser or variable speed spindle. 
+ GRBL Arduino Library - Use the Arduino IDE to flash GRBL directly to your Arduino 
+ Quick GRBL setup guide for Windows (Arduino G-Code Interpreter) 
+ Grbl (Arduino G-Code Processor) - Pin Layout 
+ Arduino Uno and Mega Dimensions 
+ Raspberry Pi CNC Board / Hat 
+ Install and Run Putty on your Raspberry Pi 
+ Opensource CNC controller written for Arduino&#039;s (G-code interpreter GRBL) 
+ RSS - Posts 
+ Categories Categories 
+ Select Category 
+ Arduino 
+ Internet 
+ Shields 
+ Automation 
+ Environment 
+ Medicine 
+ Automobiles 
+ CNC 
+ 3d Printing 
+ Breakout Board 
+ Foam Cutter 
+ G-Code 
+ Laser Cutter 
+ Lathe 
+ Milling Machine 
+ Pick and Place 
+ DIY 
+ Vacuum Forming 
+ Electronics 
+ Arduino 
+ BeagleBone 
+ Lasers 
+ LED 
+ MCU 
+ Motors 
+ Networking 
+ Other 
+ PCB 
+ Power Supply 
+ Raspberry Pi 
+ Stepper Motors 
+ Engineering 
+ Mechanical 
+ Openbeam 
+ Metal Casting 
+ IOT 
+ ESP8266 
+ Kickstarter 
+ Makerspaces 
+ Micro-Controllers 
+ Sensors 
+ Programming 
+ 3D Modelling 
+ C++ 
+ Database 
+ Linux 
+ Python 
+ Scripts 
+ WEB 
+ Projects 
+ Robots 
+ Arms 
+ Bionic Limbs 
+ Delta 
+ Demolition 
+ Drones 
+ Farming 
+ Hexapod 
+ Industrial 
+ Jumping 
+ Manufacturing 
+ Octopod 
+ Quadcopter 
+ SCARA 
+ Sketchbot 
+ Under Water 
+ Technology 
+ Uncategorized 
+ Archives Archives 
+ Select Month 
+ November 2018 
+ July 2017 
+ December 2016 
+ December 2015 
+ November 2015 
+ October 2015 
+ August 2015 
+ July 2015 
+ June 2015 
+ May 2015 
+ February 2015 
+ August 2014 
+ July 2014 
+ June 2014 
+ May 2014 
+ April 2014 
+ March 2014 
+ January 2014 
+ December 2013 
+ November 2013 
+ October 2013 
+ September 2013 
+ August 2013 
+ July 2013 
+ June 2013 
+ May 2013 
+ April 2013 
+ March 2013 
+ February 2013 
+ January 2013 
+ December 2012 
+ November 2012 
+ October 2012 
+ September 2012 
+ August 2012 
+ Subscribe to Blog via Email 
+ Enter your email address to subscribe to this blog and receive notifications of new posts by email. 
+ Join 235 other subscribers 
+ Email Address 
+ Subscribe 
+ Tags 3d Printed 
+ 3d Printer 
+ 3d printing 
+ Arduino 
+ Arduino CNC Shield 
+ Arduino Shield 
+ ARM 
+ Automation 
+ BeagleBone 
+ CNC 
+ Delta Printer 
+ DIY 
+ Drone 
+ Feeds 
+ Foam 
+ grbl 
+ Hexapod 
+ Kicad 
+ Kickstarter 
+ Kossel Pro 
+ Laser cutter 
+ Lego 
+ Linux 
+ Milling Machine 
+ Openbeam 
+ Openhardware 
+ PCB 
+ Pick and place 
+ Pinout 
+ Pololu 
+ Power Supply 
+ Python 
+ Quadcopter 
+ Raspberry Pi 
+ Reprap 
+ Robot 
+ Robot Arm 
+ Robot of the week 
+ Robots 
+ Rostock 
+ Scara 
+ Shield 
+ Sketchup 
+ Stepper Driver 
+ WIFI 
+ &copy; Copyright 2020 - Protoneer.co.nz 
+ Infinity Theme by DesignCoral / WordPress 
+ %d bloggers like this: 
+ 

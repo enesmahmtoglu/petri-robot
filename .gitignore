@@ -1,0 +1,22 @@
+# DAVE / Eclipse
+Debug/
+Release/
+.settings/
+.metadata/
+*.launch
+.cproject
+.project
+
+# Derleme ciktilari
+*.o
+*.d
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+
+# Isletim sistemi
+Thumbs.db
+desktop.ini
+.DS_Store

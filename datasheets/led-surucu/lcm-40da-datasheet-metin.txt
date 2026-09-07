@@ -1,0 +1,586 @@
+     40W Multiple-Stage Constant Current Mode LED Driver   LCM-40DA series
+
+                                                                                                           User's Manual
+
+                                                                         Click Me
+
+                                                                                              2
+                                                                         (for DA2-Type only) (for DA-Type only)
+
+                             IS 15885(Part 2/Sec13)
+
+     AC Input: 200-240Vac                   THOMAS SAMUEL
+     (for DA2-Type only)
+                             THOMAS SAMUEL
+
+                                   R-41027766
+
+                             (except for DA2-Type)(except for DA2-Type)
+
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+ 
+                                                            
+ 
+                                                                   
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+        
+
+             
+
+          
+               
+             
+
+             
+
+                                                                             
+                                                                          
+                                                                         
+AUX
+
+                                                                         File Name:LCM-40DA-SPEC 2026-02-09
+                   40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+SPECIFICATION                           LCM-40 -
+
+ MODEL
+
+                                        Current level selectable via DIP switch, please refer to"DIP SWITCH TABLE" section
+
+          CURRENT LEVEL                 350mA            500mA                    600mA           700mA(default)               900mA    1050mA
+                                                                                                                               2 ~ 45V  2 ~ 40V
+          RATED POWER                   42W
+
+OUTPUT    DC VOLTAGE RANGE              2 ~ 100V         2 ~ 80V                  2 ~ 67V         2 ~ 57V
+
+          OPEN CIRCUIT VOLTAGE (max.) 110V                                                        65V
+
+          CURRENT RIPPLE Note.5 5.0% max. @rated current
+
+          CURRENT TOLERANCE             ±5%
+                                        Nominal 12V(deviation 11.4~12.6V)@50mA for AUX-Type only
+          AUXILIARY DC OUTPUT           500ms / 230VAC
+
+          SETUP TIME          Note.3    180 ~ 295VAC 254 ~ 392VDC
+                              Note.9    (Please refer to "STATIC CHARACTERISTIC" section)
+
+          VOLTAGE RANGE Note.2
+
+          FREQUENCY RANGE               47 ~ 63Hz
+
+          POWER FACTOR (Typ.)           PF0.975/230VAC, PF0.95/277VAC@full load
+                                        (Please refer to "POWER FACTOR (PF) CHARACTERISTIC" section)
+
+                                                THD< 20%(@load75%)
+          TOTAL HARMONIC DISTORTION (Please refer to "TOTAL HARMONIC DISTORTION(THD)" section)
+
+INPUT     EFFICIENCY (Typ.) Note.4 91%
+
+          AC CURRENT (Typ.)             0.23A/230VAC 0.2A/277VAC
+
+          INRUSH CURRENT (Typ.)         COLD START 20A(twidth=260s measured at 50% Ipeak) at 230VAC; Per NEMA 410
+
+          MAX. No. of PSUs on 16A       26 units (circuit breaker of type B) / 44 units (circuit breaker of type C) at 230VAC
+          CIRCUIT BREAKER
+
+          LEAKAGE CURRENT               <0.5mA / 240VAC
+
+          STANDBY POWER                 <0.5W for Blank-Type, <1.2W for AUX-Type
+          CONSUMPTION Note.6
+
+               SHORT CIRCUIT            Constant current limiting, recovers automatically after fault condition is removed
+PROTECTION OVER VOLTAGE                 110 ~ 130V
+                                        Shutdown o/p voltage, re-power on to recover
+
+               OVER TEMPERATURE         Shutdown o/p voltage,re-power on to recover
+               DIMMING
+FUNCTION SYNCHRONIZATION                Please refer to "DIMMING OPERATION" section
+               TEMP. COMPENSATION       Please refer to "SYNCHRONIZATION OPERATION" section
+               WORKING TEMP.            By external NTC, please refer to "TEMPERATURE COMPENSATION OPERATION"section
+                                        Tcase=-30 ~ +90 (Please refer to " OUTPUT LOAD vs TEMPERATURE" section)
+               MAX. CASE TEMP.          Tcase=+90
+               WORKING HUMIDITY         20 ~ 90% RH non-condensing
+ENVIRONMENT                             -40 ~ +80, 10 ~ 95% RH
+               STORAGE TEMP., HUMIDITY  ±0.03%/ (0 ~ 50)
+               TEMP. COEFFICIENT
+                                        10 ~ 500Hz, 2G 10min./1cycle, period for 60min. each along X, Y, Z axes
+               VIBRATION                UL8750(except for DA2-Type), CSA C22.2 No.250.13-12, ENEC BS EN/EN61347-1, BS EN/EN61347-2-13, BS EN/EN62384
+                                        independent, GB/T19510.1, GB/T19510.213, BIS IS15885(except for DA2-Type), EAC TP TC 004 approved; According to
+          SAFETY STANDARDS              BS EN/EN61347-2-13 appendix J suitable for emergency installations(EL)(AC Input: 200-240Vac)(for DA2-Type only)
+                                        IEC62386-101, 102, 207,251
+SAFETY &  DALI STANDARDS                I/P-O/P:3.75KVAC;I/P-DA:1.5KVAC; O/P-DA:1.5KVAC
+EMC       WITHSTAND VOLTAGE             I/P-O/P:>100M Ohms / 500VDC / 25/ 70% RH
+          ISOLATION RESISTANCE          Compliance to BS EN/EN55015, BS EN/EN61000-3-2 Class C(@load40%) ; BS EN/EN61000-3-3;
+                                        GB/T 17743, GB17625.1, EAC TP TC 020
+          EMC EMISSION Note.7
+
+          EMC IMMUNITY                  Compliance to BS EN/EN61000-4-2,3,4,5,6,8,11, BS EN/EN61547, light industry level(surge immunity Line-Line 2KV),
+                                        EAC TP TC 020
+
+          MTBF                          2271.4K hrs min. Telcordia SR-332 (Bellcore) ; 193.7K hrs min. MIL-HDBK-217F (25)
+
+OTHERS    DIMENSION                     123.5*81.5*23mm (L*W*H)
+NOTE
+          PACKING                       0.24Kg ; 54pcs/15Kg/1.12CUFT
+
+          1. All parameters NOT specially mentioned are measured at 230VAC input, rated current and 25 of ambient temperature.
+          2. De-rating may be needed under low input voltages. Please refer to "STATIC CHARACTERISTIC" sections for details.
+          3. Length of set up time is measured at first cold start. Turning ON/OFF the driver may lead to increase of the set up time.
+          4. Efficiency is measured at 500mA/80V output set by DIP switch.
+          5. Current ripple is measured 50%~100% of maximum voltage under rated power delivery.
+          6. Standby power consumption is measured at 180~230VAC.
+          7. The driver is considered as a component that will be operated in combination with final equipment. Since EMC performance will be affected by the
+
+             complete installation, the final equipment manufacturers must re-qualify EMC Directive on the complete installation again.
+             (as available on https://www.meanwell.com//Upload/PDF/EMI_statement_en.pdf)
+          8. The ambient temperature derating of 3.5/1000m with fanless models and of 5/1000m with fan models for operating altitude higher than 2000m(6500ft).
+          9. Based on IEC 62386-101/102 DALI power on timing and interruption regulations, the set up time needs to test with a DALI controller which
+             can support for DALI power on function, otherwise the set up time will be higher than 0.5 second for DA2-type.
+          10. To fulfill requirements of the latest ErP regulation for lighting fixtures, this LED power supply can only be used behind a switch without permanently
+
+               connected to the mains.
+
+           Product Liability DisclaimerFor detailed information, please refer to https://www.meanwell.com/serviceDisclaimer.aspx
+
+                                                                                                                                                                                                   File Name:LCM-40DA-SPEC 2026-02-09
+           40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+BLOCK DIAGRAM                                                                                                                  PFC fosc : 60KHz
+                                                                                                                              PWM fosc : 80KHz
+
+        EMI FILTER      PFC                                  POWER    RECTIFIERS                                                          +12Vaux
+                     CIRCUIT                               SWITCHING                                                                      (optional)
+I/P     &                                                             RECTIFIERS
+                       PFC                                                  &                                                             +V
+        RECTIFIERS  CONTROL                                                                                                               -V
+                                                                         FILTER                                               MCU DA+ DA-
+                                                                                        CURRENT
+                              O.L.P.                         PWM                           LIMIT
+                              O.T.P.                       CONTROL
+                                                                                     DETECTION
+                                                                                       CIRCUIT
+
+                                                                                  O.V.P.
+
+DIP SWITCH TABLE
+
+LCM-40DA/DA2 is a multiple-stage constant current driver, selection of output current through DIP switch is exhibited below.
+
+Io      DIP S.W. 1 2 3 4 5 6
+
+350mA      ---- ---- ---- ---- ---- ----
+
+500mA      ON ---- ---- ---- ---- ----
+
+600mA      ON ON ---- ---- ---- ----
+
+700mA(factory default) ON ON ON ---- ---- ON
+
+900mA      ON ON ON ON ---- ON
+
+1050mA     ON ON ON ON ON ON
+
+Note: For more current setting,please contact MW's sales.
+
+                                                                                  File Name:LCM-40DA-SPEC 2026-02-09
+       40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+DIMMING OPERATION
+
+LCM-40DA    DA-                                                   LCM-40DA2  DA-
+            DA+                                                              DA+
+            PUSH                                     Push Button             AC/N                         Push Button
+            AC/N                                     AC/N                    AC/L                         AC/N
+            AC/L                                     AC/L                                                 AC/L
+
+PUSH dimming(primary side)
+
+Action      Action duration             Function
+Short push  0.1~1 sec.       Turn ON-OFF the driver
+Long push   1.5~10 sec.      Every Long Push changes the dimming direction, dimming up or down
+Reset       >11 sec.         Set up the dimming level to 100%
+
+The factory default dimming level is at 100%.
+If the push action lasts less than 0.05 sec., it will not lead to a change for the status of the driver.
+Up to 10 drivers can perform the PUSH dimming at the same time when utilizing one common push button.
+The maximum length of the cable from the push button to the last driver is 20 meters.
+The additive push button can be connected only between the PUSH terminal, as displayed in the diagram,
+
+   and AC/L (in brown or black); it will lead to short circuit if it is connected to AC/N.
+
+DALI interface(primary side; for DA/DA2-Type)
+
+Apply DALI signal between DA+ and DA-
+DALI protocol comprises 16 groups and 64 addresses.
+First step is fixed at 6% of output.
+
+                                                                                                          File Name:LCM-40DA-SPEC 2026-02-09
+       40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+SYNCHRONIZATION OPERATION
+
+   Synchronization up to 10 drivers (1 master + 9 slaves)
+   Dimming operating range : 10%~100%
+   Sync cable length : < 5m
+   Sync cable type : Flat cable
+   Sync cable cross section area : 22 - 24 AWG (0.2~0.3mm2)
+
+LCM-40DA/DA2 SYN.               LCM-40DA/DA2 SYN.           LCM-40DA/DA2 SYN.
+                    --                    --                                                                                           --
+Output Current (%)(Slave 2)     (Master)                    (Slave 1)
+
+                           +    5m                          5m
+                                +
+                                                                             +
+                                                                                 +
+                                                                                                                              +
+                                                                                                                                  +
+ NOTE: 1. Please make sure all units are set to 100% dimming setting (factory default) before synchronizing.
+          2. Min. Dimming operating range depends on dimmer setting.
+
+TEMPERATURE COMPENSATION OPERATION
+
+LCM-40DA/DA2 have the built-in temperature compensation function ; by connecting a temperature sensor (NTC resistor) between the +NTC / -NTC
+terminal of LCM-40DA/DA2 and the detecting point on the lighting system or the surrounding environment, output current of LCM-40DA/DA2 could be
+correspondingly changed, based on the sensed temperature, to ensure the long life of LED.
+
+                           NTC derating curve
+
+      105
+
+100
+
+                                                                                                                            222200KKO
+
+ 95
+
+                                                                                                                            333300KKO
+
+ 90 447700KKO
+
+85
+
+80
+
+75
+
+70
+
+65
+
+    55          60      65  70  75  80    85        90  95
+
+                    Sensed Temperature()
+
+ LCM-40DA/DA2 can still be operated normally when the NTC resistor is not connected and the value of output current will be the current level selected
+   through the DIP switch.
+
+? NTC reference:
+
+NTC resistance                      Output Current
+
+220K            < 60, 100% of the rated current (corresponds to the setting current level)
+                > 60, output current begins to reduce, please refer to the curve for details.
+
+330K            < 70, 100% of the rated current (corresponds to the setting current level)
+                > 70, output current begins to reduce, please refer to the curve for details.
+
+470K            < 80, 100% of the rated current (corresponds to the setting current level)
+                > 80, output current begins to reduce, please refer to the curve for details.
+
+  Notes: 1. MEAN WELL does not offer the NTC resistor and all the data above are measured by using THINKING TTC03 series.
+           2. If other brands of NTC resistor is applied,please check the temperature curve first.
+
+ Dimming and synchronization function of the driver will be invalid when the "temperature compensation" function is in use.
+
+                                                                                                                                           File Name:LCM-40DA-SPEC 2026-02-09
+       40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+OUTPUT LOAD vs TEMPERATURE
+
+LOAD (%)  100                                                                                       LOAD (%)  100
+                                                                           Others                              80
+                                                                                                               60
+           80                                                                                                  40
+           60                                                                                                  20
+           40 1050mA
+           20
+
+          -30 -15  0  15  30     40  50 60                                         70 (HORIZONTAL)            -30 -25 0  20  45  55    65  75  90 (HORIZONTAL)
+
+                   AMBIENT TEMPERATURE,Ta ()                                                                                 Tcase ()
+
+          STATIC CHARACTERISTIC
+
+LOAD (%) 100
+           90
+           80
+           70
+           60
+           50
+           40
+
+            180 190 200 210 220 230 240 250 260 270 280 295
+
+                           INPUT VOLTAGE (V) 60Hz
+De-rating is needed under low input voltage.
+
+                                                                                                                                       File Name:LCM-40DA-SPEC 2026-02-09
+                       40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+  TOTAL HARMONIC DISTORTION (THD)
+
+ Tcase at 80
+
+                50%                                                                                                                                            70%
+
+                45%                                                                                                                                            60%
+
+                40%
+
+THD             35%                                                                                                                     EFFICIENCY (%) PF THD  50%
+                                                                                                                                 350mA
+                                                                                                                                                                                                                                                                                350mA
+                30%                                                                                                                                            40%
+
+                                                                                                        500mA                                                                                                                                                                   500mA
+
+                25%
+
+                                                                                                        600mA                                                  30%                                                                                    600mA
+
+                20%
+
+                15%                                                                                     700mA                                                  20%                                                                                    700mA
+
+                10%                                                                                     900mA                                                                                                                                                                   900mA
+                                                                                                                                                               10%
+                5%                                                                                      1050mA
+                                                                                                                                                                                                                                                                                1050mA
+
+                0%                                                                                                                                             0%
+
+                       10% 20% 30% 40% 50% 60% 70% 80% 90% 100%                                                                                                       10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+
+                                                  LOAD                                                                                                                     LOAD
+                                             (230Vac Input)                                                                                                           (277Vac Input)
+
+                POWER FACTOR (PF) CHARACTERISTIC
+
+                  Tcase at 80
+
+                1.00
+
+                                                                                                                                                               0.98
+
+                0.97                                                                                                                                           0.95
+
+                                                                                                                                                               0.92
+
+                0.94                                                                                                                                           0.89
+
+                                                                                                                                                               0.86                                                                                   350
+
+                0.91                                                                                    350
+
+                                                                                                                                                               0.83                                                                                   500
+
+                0.88                                                                                    500                                                    0.80
+
+                                                                                                        600                                                    0.77                                                                                   600
+
+                0.85                                                                                                                                           0.74
+
+PF              0.82                                                                                    700                                                    0.71                                                                                   700
+
+                                                                                                                                                               0.68
+
+                0.79                                                                                    900                                                    0.65                                                                                   900
+
+                                                                                                        1050                                                   0.62
+
+                0.76                                                                                                                                           0.59                                                                                   1050
+
+                0.73                                                                                                                                           0.56
+
+                                                                                                                                                               0.53
+
+                0.70                                                                                                                                           0.50
+
+                      10% 20% 30% 40% 50% 60% 70% 80% 90% 100%                                                                                                        10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+
+                                                                                                 (40W)                                                                                                                                         (40W)
+
+                                                   LOAD                                                                                                                                           LOAD
+                                              (230Vac Input)                                                                                                                                 (277Vac Input)
+
+    EFFICIENCY vs LOAD
+
+LCM-40DA series possess superior working efficiency that up to 91% can be reached in field applications.
+ Tcase at 80
+
+                95.0%                                                                                                                                          95.0%
+
+                90.0%                                                                                                                                          90.0%
+
+                85.0%                                                                                                                                          85.0%
+
+EFFICIENCY (%)  80.0%                                                                                   350                                                    80.0%
+
+                                                                                                                                                                                                                                                      350
+
+                75.0%                                                                                   500                                                    75.0%                                                                                  500
+
+                70.0%                                                                                   600                                                    70.0%                                                                                  600
+
+                65.0%                                                                                   700                                                    65.0%                                                                                  700
+
+                60.0%                                                                                   900                                                    60.0%                                                                                  900
+
+                55.0%                                                                                   1050                                                   55.0%                                                                                  1050
+
+                50.0%                                                                                                                                          50.0%
+
+                45.0%                                                                                                                                          45.0%
+                        10% 20% 30% 40% 50% 60% 70% 80% 90% 100%                                                                                                       10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+
+                            LOAD                                                                                                                                           LOAD
+                       (230Vac Input)                                                                                                                                 (277Vac Input)
+
+                                                                                                                                                                                      File Name:LCM-40DA-SPEC 2026-02-09
+                             40W Multiple-Stage Constant Current Mode LED Driver L C M - 4 0 D A series
+
+      MECHANICAL SPECIFICATION                                                  Case No.LCM-60A Unit:mm Tolerance:±1
+
+                                    123.5
+
+            6.75                    110       2-
+                                                 4.2
+      6.75                                                        6.75             1
+
+                                                                      6.75         2
+
+                                                                                   3        TB1
+
+                                                                                   4
+
+                                                                                   5
+
+81.5                                                                            1
+
+      68                                                                        2     SYN.               LCM-40DA
+
+                                                                                3 1 CN101
+                                                                                4           2
+
+                                                                                TB3         3 CN100
+
+                                                                                            4
+
+                                                                                            1
+                                                                                            2 TB5
+
+                                                                                ON
+
+                                                                                123 456
+
+                  39.3                     65.5                                    1
+                       7.8                             7.8
+                                                                                   2
+                                                  2-4
+                                                                                   3        TB1
+
+                                                                                   4
+
+      23                                                                        1
+                          4
+                                                                                2     SYN.           LCM-40DA2
+
+                                                                                3 1 CN101
+                                                                                4           2
+
+                                                                                TB3         3 CN100
+
+                                                                                            4
+
+                                                                                            1
+                                                                                            2 TB5
+
+                                                                                ON
+
+            Terminal Pin No. Assignment( TB1)(LCM-40DA)                         123 456
+
+            Pin No. Assignment Pin No. Assignment
+
+                  1          AC/L          4                DA+
+
+                  2          AC/N          5                DA-                                      15
+                                                                                                               40
+                  3          PUSH                                                                    tc
+
+            Terminal Pin No. Assignment( TB1)(LCM-40DA2)
+
+            Pin No. Assignment Pin No. Assignment
+
+                  1          AC/L          4                DA-
+
+                  2          AC/N
+
+                  3          DA+
+
+             Terminal Pin No. Assignment(TB3)                                                  Bottom View
+
+            Pin No. Assignment Pin No.                      Assignment          tc : Max. Case Temperature
+
+                  1          +FAN(+AUX)    3                +NTC
+
+                  2          -FAN(-AUX)    4                -NTC
+
+             Pin1(+FAN) / Pin2(-FAN) is the Auxiliary DC output for the optional model LCM-40DA-AUX; it can be used to drive fan.
+
+             Terminal Pin No. Assignment(TB5)
+
+            Pin No. Assignment
+
+                  1             +V
+
+                  2             -V
+
+            SYN. Connector(CN101/CN100):JST B2B-XH or equivalent
+
+            Pin No. Assignment Mating Housing                         Terminal
+
+                  1,3        +             JST XHP          JST SXH-001T-P0.6
+
+                  2,4        -             or equivalent         or equivalent
+
+      Installation Manual
+
+      Please refer to : http://www.meanwell.com/manual.html
+
+                                                                                                                   File Name:LCM-40DA-SPEC 2026-02-09
+
