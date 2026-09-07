@@ -133,3 +133,20 @@ Infineon XMC4200 Platform2Go belgeleri. *(Araştırma sürüyor, dosyalar eklene
 2. Bu INDEX'e bir satır ekleyin: ne olduğu, hangi dokümanla ilgili olduğu.
 3. **Kaynak URL'yi mutlaka yazın** — dosya bozulursa veya sürüm sorusu çıkarsa gerekir.
 4. Sürüm/revizyon numarası varsa dosya adına koyun.
+
+---
+
+## Telif ve kaynak belirtme
+
+Bu klasördeki PDF ve görsellerin **tamamı üçüncü tarafların telifli belgeleridir** ve ilgili
+üreticilere aittir: Analog Devices/Trinamic, Mean Well, Changzhou Songyang (SOYO), Shenzhen
+Zonhen, Protoneer, Bulkman 3D.
+
+Buraya yalnızca **çevrimdışı arşiv ve tekrarlanabilirlik** amacıyla konmuşlardır — bu reponun
+teknik iddialarının hangi belgeye dayandığı izlenebilsin diye. Hiçbiri değiştirilmemiştir ve
+her birinin özgün çevrimiçi kaynağı yukarıda listelenmiştir.
+
+Bu depo bu belgeler üzerinde hiçbir hak iddia etmez. Bir hak sahibi kaldırılmasını isterse
+issue açması yeterlidir, ilgili dosya çıkarılır.
+
+Reponun kendi içeriği (dokümanlar, formlar, firmware) bu kısıtın dışındadır.
